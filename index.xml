@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NeuroSnippets</title>
+    <link>https://neurosnippets.com/</link>
+    <description>Recent content on NeuroSnippets</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <lastBuildDate>Wed, 13 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Making a glass brain</title>
+      <link>https://neurosnippets.com/posts/glass-brain/</link>
+      <pubDate>Wed, 13 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/posts/glass-brain/</guid>
+      <description>Everything looks better with glass How can we give the deserved credit to white matter pathways in diffusion MRI? Easy: let&amp;rsquo;s throw away everything besides white matter. Jokes aside, tractography can already be a lot to digest, and sometimes we just need a rough reference to understand what we are looking at. If it is true that less is more, glass brains are a simple yet effective idea. In this post, I want to explore one way to make a smooth brain: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette.</description>
+    </item>
+    
+    <item>
+      <title>About me</title>
+      <link>https://neurosnippets.com/about_me/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/about_me/</guid>
+      <description>Biosketch I am on a quest for better maps of the brain. A biomedical engineer by training, I got my BSc from the University of Rome &amp;ldquo;Sapienza&amp;rdquo; in 2011, followed by a MSc from the University of Rome &amp;ldquo;Roma Tre&amp;rdquo; in 2013. My PhD has been focused on multimodal brain connectivity using a combination of MRI and non-invasive stimulation, collaborating with the Italian National Institute of Health, the Santa Lucia Foundation and the University of Sussex.</description>
+    </item>
+    
+    <item>
+      <title>Research</title>
+      <link>https://neurosnippets.com/research/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/research/</guid>
+      <description>Research vision: brain maps, cartograms and blueprints A constant element in my research are brain maps. What is a brain map? Is the result of some MRI acquisition? In a sense, even a simple clinical scan allows us to look at something hidden in our skull. However, the brain has such a complex structure, articulated in so many levels, that a map cannot be uniquely defined. Even the holy grail of hardcore connectomics, a full diagram of every synapsis, would still be missing elements: what about the myelin?</description>
+    </item>
+    
+  </channel>
+</rss>

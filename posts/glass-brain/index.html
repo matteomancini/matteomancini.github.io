@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en-uk">
+  <head>
+    <title>Making a glass brain // NeuroSnippets</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.76.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Matteo Mancini" />
+    <meta name="description" content="" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <link rel="stylesheet" href="https://neurosnippets.com/css/main.min.9594d69abdd169534d699b3e364130681441a142ca55039d76d678b2eb7141b8.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Making a glass brain"/>
+<meta name="twitter:description" content="Everything looks better with glass How can we give the deserved credit to white matter pathways in diffusion MRI? Easy: let&rsquo;s throw away everything besides white matter. Jokes aside, tractography can already be a lot to digest, and sometimes we just need a rough reference to understand what we are looking at. If it is true that less is more, glass brains are a simple yet effective idea. In this post, I want to explore one way to make a smooth brain: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette."/>
+
+    <meta property="og:title" content="Making a glass brain" />
+<meta property="og:description" content="Everything looks better with glass How can we give the deserved credit to white matter pathways in diffusion MRI? Easy: let&rsquo;s throw away everything besides white matter. Jokes aside, tractography can already be a lot to digest, and sometimes we just need a rough reference to understand what we are looking at. If it is true that less is more, glass brains are a simple yet effective idea. In this post, I want to explore one way to make a smooth brain: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neurosnippets.com/posts/glass-brain/" />
+<meta property="article:published_time" content="2021-01-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-01-13T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://neurosnippets.com/"><img class="app-header-avatar" src="/img/me.png" alt="Matteo Mancini" /></a>
+      <h1 class="title">NeuroSnippets</h1>
+      <h3 class="author">Matteo Mancini</h3>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             &bull; 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <nav class="app-header-menu">
+        
+        
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/about_me/">About me</a>
+        
+          
+             &bull; 
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/research/">Research</a>
+        
+      </nav>
+      <p>A blog about brains, open-source code and (literally) everything in between.</p>
+      <p><div class="question">Who am I</div> A biomedical engineer, Sir Henry Wellcome Postdoctoral Fellow, on a quest for better brain maps.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/matteomancini" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/ingmatman" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <a name="post"><h1 class ="post-title">Making a glass brain</h1></a>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 13, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+              <a class="tag" href="https://neurosnippets.com/tags/bash/">bash</a>
+              <a class="tag" href="https://neurosnippets.com/tags/brainviz/">brainviz</a>
+              <a class="tag" href="https://neurosnippets.com/tags/dmri/">dMRI</a>
+              <a class="tag" href="https://neurosnippets.com/tags/mrtrix3/">MRtrix3</a>
+        </div>
+      </div>
+    </header>
+    
+      <figure>
+        <img class="post-pic" src="https://neurosnippets.com/img/glass_brain.png">
+        
+          <figcaption>This is an accessible way to make a glass brain. I would not recommend <a href="https://www.nejm.org/doi/full/10.1056/nejmc1909867" title="Really glassy brains">more hardcore approaches</a>.</figcaption>
+        
+        </figure>
+    
+    <div class="post-content">
+      <h2 id="everything-looks-better-with-glass">Everything looks better with glass</h2>
+<p>How can we give the deserved credit to white matter pathways in diffusion MRI? Easy: let&rsquo;s throw away everything besides white matter. Jokes aside, tractography can already be a lot to digest, and sometimes we just need a rough reference to understand what we are looking at. If it is true that less is more, glass brains are a simple yet effective idea.
+In this post, I want to explore one way to make a smooth brain: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette. A good example of this approach is showed in this <a href="https://academic.oup.com/brain/article/141/3/888/4788771" title="Brain - A Journal of Neurology">paper</a> by Remika Mito and colleagues.</p>
+<p>The overall bash script to generate the glass brain and the related requirements are on the <a href="https://github.com/matteomancini/neurosnippets/brainviz/glass_brain">NeuroSnippets repository</a>.</p>
+<h2 id="first-steps">First steps</h2>
+<p>As sample data, I decided to use the <a href="https://openneuro.org/datasets/ds001378/versions/00003" title="SCA2 Diffusion Tensor Imaging">dataset</a> shared by Mario Mascalchi and colleagues on <a href="https://openneuro.org" title="OpenNeuro">OpenNeuro</a>, relying only on the first sessions of the healthy controls. This dataset can be easily downloaded through <a href="https://www.datalad.org" title="DataLad">DataLad</a>:</p>
+<pre><code># Retrieving the data using DataLad
+datalad install https://github.com/OpenNeuroDatasets/ds001378
+cd ds001378
+datalad get -J 4 sub-control*/ses-01/dwi/*
+</code></pre><p>Once the data have been downloaded, I used <a href="https://mrtrix.readthedocs.io/en/latest/getting_started/image_data.html" title="MRtrix3">MRtrix3</a> to:</p>
+<ol>
+<li>convert the data in <a href="https://mrtrix.readthedocs.io/en/latest/getting_started/image_data.html" title="MRtrix3 file formats">MIF</a> format, in order to embed the gradient information in the data;</li>
+<li>do a basic pre-processing (PCA denoising, Gibbs unringing, eddy current correction);</li>
+<li>compute an average volume from the b0 volumes;</li>
+<li>estimate a brain mask.
+All these steps are done in the following loop:</li>
+</ol>
+<pre><code># Pre-processing using MRtrix3
+for sub in $(ls -d sub-control*); do
+    mrconvert -fslgrad $sub/ses-01/dwi/${sub}_ses-01_dwi.bvec \
+        $sub/ses-01/dwi/${sub}_ses-01_dwi.bval $sub/ses-01/dwi/${sub}_ses-01_dwi.nii.gz \
+        $sub/ses-01/dwi/${sub}_ses-01_dwi.mif
+    dwidenoise $sub/ses-01/dwi/${sub}_ses-01_dwi.mif \
+        $sub/ses-01/dwi/${sub}_ses-01_dwi_desc-denoised.mif
+    mrdegibbs $sub/ses-01/dwi/${sub}_ses-01_dwi_desc-denoised.mif \
+        $sub/ses-01/dwi/${sub}_ses-01_dwi_desc-unringed.mif
+    dwipreproc $sub/ses-01/dwi/${sub}_ses-01_dwi_desc-unringed.mif \
+        $sub/ses-01/dwi/${sub}_ses-01_dwi_desc-preproc.mif -rpe_none -pe_dir PA
+
+    dwiextract -bzero $sub/ses-01/dwi/${sub}_ses-01_dwi_desc-preproc.mif - | \
+        mrmath - mean $sub/ses-01/dwi/${sub}_ses-01_dwi_desc-meanb0.mif -axis 3
+    dwi2mask $sub/ses-01/dwi/${sub}_ses-01_dwi_desc-preproc.mif \
+        $sub/ses-01/dwi/${sub}_ses-01_dwi_desc-mask.mif
+done
+</code></pre><p>Since I wanted a smooth result, just averaging volumes from different subjects more or less in the same location would not be great. One elegant way to align them using MRtrix3 is building a template from all the subjects and then align all the data to the template:</p>
+<pre><code># Building a template with MRtrix3
+mkdir -p ../template/meanb0s
+mkdir ../template/masks
+foreach sub-control* : ln -sr IN/ses-01/dwi/NAME_ses-01_dwi_desc-meanb0.mif \
+    ../template/meanb0s/NAME.mif
+foreach sub-control* : ln -sr IN/ses-01/dwi/NAME_ses-01_dwi_desc-mask.mif \
+    ../template/masks/NAME.mif
+
+population_template ../template/meanb0s -mask_dir ../template/masks \
+    ../template/meanb0_template.mif
+
+foreach sub-control* : mrregister IN/ses-01/dwi/NAME_ses-01_dwi_desc-meanb0.mif \
+    -mask1 IN/ses-01/dwi/NAME_ses-01_dwi_desc-mask.mif ../template/meanb0_template.mif \
+    -nl_warp IN/ses-01/dwi/NAME_ses-01_dwi_desc-warp_sub2tmp.mif \
+    IN/ses-01/dwi/NAME_ses-01_dwi_desc-warp_tmp2sub.mif
+
+mkdir -p ../template/masks_tmp
+foreach sub-control* : mrtransform IN/ses-01/dwi/NAME_ses-01_dwi_desc-mask.mif \
+    -warp IN/ses-01/dwi/NAME_ses-01_dwi_desc-warp_sub2tmp.mif -inter nearest \
+    -datatype bit ../template/masks_tmp/IN.mif
+cd ../template
+</code></pre><p>As the goal here is just in terms of visualization, for the sake of execution time I built the template out of the average b0 volumes. The population_template tool actually allows to do so much more, <a href="https://mrtrix.readthedocs.io/en/latest/fixel_based_analysis/st_fibre_density_cross-section.html" title="MRtrix3 Documentation">as shown in this tutorial</a>.</p>
+<h2 id="where-is-the-glass">Where is the glass?</h2>
+<p>Now that we have all the masks, it is finally time to make things even smoother! This is what we will do:</p>
+<ol>
+<li>average all the masks aligned with the template;</li>
+<li>upsample the mean mask;</li>
+<li>use a Gaussian filter to smooth the upsampled mask;</li>
+<li>use a threshold to obtain a neat black-and-white result;</li>
+<li>dilate the previous volume;</li>
+<li>subtract the volume obtained in point 4 from the dilated volume.</li>
+</ol>
+<pre><code># Making a glass brain!
+mrmath masks_tmp/* mean mask_mean.mif
+mrresize mask_mean.mif -scale 5 mask_up.mif
+mrfilter mask_up.mif smooth -stdev 2 mask_smooth.mif
+mrthreshold mask_smooth.mif -abs 0.5 mask_thres.mif
+maskfilter mask_thres.mif dilate -npass 2 mask_dilated.mif
+mrcalc mask_dilated.mif mask_thres.mif -subtract glass_brain.mif
+</code></pre><p>And we have our smooth brain surface! Playing with the alpha control in mrview will allow us to make it glassy.
+Now that we have a glass brain, we need something to put inside it!</p>
+<h2 id="filling--the-glass-brain">Filling (!) the glass brain</h2>
+<p>Let&rsquo;s reconstruct a corpus callosum to be displayed in our glass brain. I selected the first subject as an example, estimated the response function using the Tournier algorithm, and then estimated the fiber orientration distribution. To quickly reconstruct the corpus callosum without having to define regions of interest or anything like that, I used <a href="https://github.com/MIC-DKFZ/TractSeg" title="GitHub">TractSeg</a>. The very final step is to align the reconstructed corpus callosum with the template and therefore the glass brain.</p>
+<pre><code># Reconstructing the Corpus Callosum with TractSeg
+cd ../ds001378/sub-control01/ses-01/dwi
+dwi2response tournier sub-control01_ses-01_dwi_desc-preproc.mif \
+    sub-control01_ses-01_dwi_desc-response.txt
+dwiextract sub-control01_ses-01_dwi_desc-preproc.mif - | dwi2fod msmt_csd - \
+    sub-control01_ses-01_dwi_desc-response.txt \
+    sub-control01_ses-01_dwi_desc-wmfod.mif \
+    -mask sub-control01_ses-01_dwi_desc-mask.mif
+sh2peaks sub-control01_ses-01_dwi_desc-wmfod.mif \
+    sub-control01_ses-01_dwi_desc-peaks.nii.gz
+TractSeg -i sub-control01_ses-01_dwi_desc-peaks.nii.gz
+TractSeg -i sub-control01_ses-01_dwi_desc-peaks.nii.gz --output_type TOM
+tckgen -algorithm FACT -angle 20 -seed_image sub-control01_ses-01_dwi_desc-mask.mif \
+    tractseg_output/TOM/CC.nii.gz sub-control01_ses-01_dwi_desc-CC.tck
+tcktransform sub-control01_ses-01_dwi_desc-CC.tck \
+    sub-control01_ses-01_dwi_desc-warp_tmp2sub.mif ../../../../template/CC.tck
+</code></pre><p>Now you have a corpus callosum to put inside your glass brain!</p>
+<h2 id="useful-references">Useful references</h2>
+<ul>
+<li><a href="https://onlinelibrary.wiley.com/doi/full/10.1002/nbm.3902" title="Schultz and Vilanova, 2019">&ldquo;Diffusion MRI visualization&rdquo;</a></li>
+<li><a href="https://openneuro.org/datasets/ds001378/versions/00003" title="OpenNeuro">SCA2 Diffusion Tensor Imaging dataset</a></li>
+<li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6042729/" title="Mascalchi et al., 2018">&ldquo;Histogram analysis of DTI-derived indices reveals pontocerebellar degeneration and its progression in SCA2&rdquo;</a></li>
+<li><a href="https://academic.oup.com/brain/article/141/3/888/4788771" title="Mito et al., 2018">&ldquo;Fibre-specific white matter reductions in Alzheimer’s disease and mild cognitive impairment&rdquo;</a></li>
+<li><a href="https://mrtrix.readthedocs.io/en/latest/fixel_based_analysis/st_fibre_density_cross-section.html" title="MRtrix3 Documentation">A more complex approach to template-based analysis of dMRI data</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

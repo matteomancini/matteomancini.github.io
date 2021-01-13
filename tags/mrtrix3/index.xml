@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MRtrix3 on NeuroSnippets</title>
+    <link>https://neurosnippets.com/tags/mrtrix3/</link>
+    <description>Recent content in MRtrix3 on NeuroSnippets</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <lastBuildDate>Wed, 13 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/mrtrix3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Making a glass brain</title>
+      <link>https://neurosnippets.com/posts/glass-brain/</link>
+      <pubDate>Wed, 13 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/posts/glass-brain/</guid>
+      <description>Everything looks better with glass How can we give the deserved credit to white matter pathways in diffusion MRI? Easy: let&amp;rsquo;s throw away everything besides white matter. Jokes aside, tractography can already be a lot to digest, and sometimes we just need a rough reference to understand what we are looking at. If it is true that less is more, glass brains are a simple yet effective idea. In this post, I want to explore one way to make a smooth brain: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette.</description>
+    </item>
+    
+  </channel>
+</rss>
