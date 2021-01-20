@@ -6,7 +6,34 @@
     <description>Recent content in Tags on NeuroSnippets</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Wed, 13 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dataviz</title>
+      <link>https://neurosnippets.com/tags/dataviz/</link>
+      <pubDate>Wed, 20 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/tags/dataviz/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>plotly</title>
+      <link>https://neurosnippets.com/tags/plotly/</link>
+      <pubDate>Wed, 20 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/tags/plotly/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://neurosnippets.com/tags/python/</link>
+      <pubDate>Wed, 20 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/tags/python/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>bash</title>
       <link>https://neurosnippets.com/tags/bash/</link>

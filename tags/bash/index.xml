@@ -13,7 +13,7 @@
       <pubDate>Wed, 13 Jan 2021 00:00:00 +0000</pubDate>
       
       <guid>https://neurosnippets.com/posts/glass-brain/</guid>
-      <description>Everything looks better with glass How can we give the deserved credit to white matter pathways in diffusion MRI? Easy: let&amp;rsquo;s throw away everything besides white matter. Jokes aside, tractography can already be a lot to digest, and sometimes we just need a rough reference to understand what we are looking at. If it is true that less is more, glass brains are a simple yet effective idea. In this post, I want to explore one way to make a smooth brain: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette.</description>
+      <description>Everything looks better with glass How can we give the deserved credit to white matter pathways in diffusion MRI? Easy: let&amp;rsquo;s throw away everything besides white matter. Jokes aside, tractography can already be a lot to digest, and sometimes we just need a rough reference to understand what we are looking at. If it is true that less is more, glass brains are a simple yet effective idea. In this post, I want to explore one way to make a smooth brain proposed by Thijs Dhollander: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette.</description>
     </item>
     
   </channel>

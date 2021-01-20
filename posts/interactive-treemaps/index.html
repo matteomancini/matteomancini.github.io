@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en-uk">
+  <head>
+    <title>Interactive treemaps for interactive reviews // NeuroSnippets</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.76.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Matteo Mancini" />
+    <meta name="description" content="" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <link rel="stylesheet" href="https://neurosnippets.com/css/main.min.9594d69abdd169534d699b3e364130681441a142ca55039d76d678b2eb7141b8.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-187589071-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Interactive treemaps for interactive reviews"/>
+<meta name="twitter:description" content="Beyond rows and columns If you think about a literature review or a meta-analysis, your expectation in terms of format probably reflects the following description: a PDF file containing a large table with the main details from the surveyed studies. This immediate association is the result of some sort of immutability in time of reviews, and more in general scientific papers. But there is no reason for papers to be conservative, static objects."/>
+
+    <meta property="og:title" content="Interactive treemaps for interactive reviews" />
+<meta property="og:description" content="Beyond rows and columns If you think about a literature review or a meta-analysis, your expectation in terms of format probably reflects the following description: a PDF file containing a large table with the main details from the surveyed studies. This immediate association is the result of some sort of immutability in time of reviews, and more in general scientific papers. But there is no reason for papers to be conservative, static objects." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neurosnippets.com/posts/interactive-treemaps/" />
+<meta property="article:published_time" content="2021-01-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-01-20T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://neurosnippets.com/"><img class="app-header-avatar" src="/img/me.png" alt="Matteo Mancini" /></a>
+      <h1 class="title">NeuroSnippets</h1>
+      <h3 class="author">Matteo Mancini</h3>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             &bull; 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <nav class="app-header-menu">
+        
+        
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/about_me/">About me</a>
+        
+          
+             &bull; 
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/research/">Research</a>
+        
+      </nav>
+      <p>A blog about brains, open-source code and (literally) everything in between.</p>
+      <p><div class="question">Who am I</div> A biomedical engineer, Sir Henry Wellcome Postdoctoral Fellow, on a quest for better brain maps.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/matteomancini" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/ingmatman" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <a name="post"><h1 class ="post-title">Interactive treemaps for interactive reviews</h1></a>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 20, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          7 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+              <a class="tag" href="https://neurosnippets.com/tags/python/">python</a>
+              <a class="tag" href="https://neurosnippets.com/tags/dataviz/">dataviz</a>
+              <a class="tag" href="https://neurosnippets.com/tags/plotly/">plotly</a>
+        </div>
+      </div>
+    </header>
+    
+      <figure>
+        <img class="post-pic" src="https://neurosnippets.com/img/treemaps.gif">
+        
+          <figcaption>An interactive treemap is a good companion to a meta-analysis. Unless, you know, it becomes <a href="https://xkcd.com/1447/" title="Meta-meta-meta-analysis">too meta</a>.</figcaption>
+        
+        </figure>
+    
+    <div class="post-content">
+      <h2 id="beyond-rows-and-columns">Beyond rows and columns</h2>
+<p>If you think about a literature review or a meta-analysis, your expectation in terms of format probably reflects the following description: a PDF file containing a large table with the main details from the surveyed studies. This immediate association is the result of some sort of <em>immutability in time</em> of reviews, and more in general scientific papers. But there is no reason for papers to be conservative, static objects. In this post, I want to provide an example of an interactive element that can be used to complement a table in a review or in a meta-analysis. For a glimpse of how it looks in the wild, <a href="https://elifesciences.org/articles/61523/executable" title="Mancini et al., 2020">this executable research article (ERA)</a> on <em>Elife</em> offers several flavours of interactive figures.</p>
+<p>The Jupyter Notebook to generate the interactive treemap and the related requirements are on the <a href="https://github.com/matteomancini/neurosnippets/tree/master/dataviz/interactive-treemaps">NeuroSnippets repository</a>. To try it out directly from the browser, you can use <a href="https://colab.research.google.com/github/matteomancini/neurosnippets/blob/master/dataviz/interactive-treemaps/treemap.ipynb" title="Open in Colab">Google Colab</a> or <a href="https://mybinder.org/v2/gh/matteomancini/neurosnippets/master?filepath=dataviz/interactive-treemaps/treemap.ipynb" title="Open in MyBinder">MyBinder</a>.</p>
+<h2 id="making-interactive-stuff-up">Making (interactive) stuff up</h2>
+<p>To keep the topic on <em>brainy</em> stuff, I picked <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6360487/" title="Straatof et al., 2019">this systematic review</a> by Milou Straathof and colleagues. The topic is the correlation between structural and functional connectivity using different kinds of data. To keep things simple, I focused on the use of diffusion-weighted and functional MRI data, as described in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6360487/table/table1-0271678X18809547/?report=objectonly" title="Resting-state functional connectivity and diffusion-based structural connectivity">this table</a>. For each study reported, I collected all the relevant details and filled them in <a href="https://github.com/matteomancini/neurosnippets/raw/master/dataviz/interactive-treemaps/dataset.xlsx" title="NeuroSnippets GitHub">this spreadsheet</a>. I kept the correlation values for all the parcel resolution levels (high, low or voxel) reported, but considered only a single correlation value for each resolution. The goal was to arrange the studies in a treemap showing the correlation values reported and the related details depending on the resolution used.</p>
+<p>Once we have a spreadsheet like this one, we can quickly read it with <a href="https://pandas.pydata.org" title="pandas"><code>pandas</code></a> and do all kind of stuff. What we need to pick now is a suitable graphing library. I have chosen <a href="https://plotly.com/python/" title="Plotly for Python"><code>plotly</code></a> because it allows to make wonders in few lines of code, it is available in three programming languages (<code>javascript</code>, <code>python</code> and <code>R</code>) and last but not least it rapidly fills Jupyter notebooks with beautiful interactive figures.</p>
+<p>There are two routes we can take for making a treemap: <a href="https://plotly.com/python/plotly-express/" title="Plotly Express in python"><code>plotly.express</code></a> and <a href="https://plotly.com/python/graph-objects/" title="Plotly Graph Objects in Python"><code>plotly.graph_objects</code></a>. The <code>plotly.express</code> module provides functions that can create at once a figure directly from a <code>pandas</code> dataframe. The catch is being less able to customize the final result. In <code>plotly.graph_objects</code>, we have more barebone functions. For this specific scenario, we will go the second route, as it will allow us to literally <em>fill</em> the treemap.</p>
+<p>Since we have picked <code>plotly.graph_objects</code>, rather then working directly with an arbitrary dataframe, we will need to build a specific one where we define all the elements of the treemaps, and for each of them their parent. What is a treemap in the end? It is a map based on a tree structure, so the inner elements (or <em>leaves</em>) need to be inside outer ones (or <em>branches</em>). As we want to organize the leaves using the respective resolution as a branch, we need to generate a hierarchical dataframe. In the <code>plotly</code> documentation there is <a href="https://plotly.com/python/treemaps/#treemap-of-a-rectangular-dataframe-with-continuous-color-argument-in-pxtreemap" title="Treemaps with a continuous colorscale">an example of how to do that</a> &ndash; we will extend it in order to handle an edge case: leaves with the same names but in different branches. We have to deal with this case as we have studies reporting correlation values for both low and high resolution levels.
+This is how it looks like:</p>
+<pre><code>
+import pandas as pd
+import plotly.graph_objects as go
+
+def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
+    &quot;&quot;&quot;
+    Build a hierarchy of levels for Treemap charts.
+
+    Levels are given starting from the bottom to the top of the hierarchy,
+    ie the last level corresponds to the root.
+    It can handle leaves with the same name but in different branches.
+    &quot;&quot;&quot;
+    df_all_trees = pd.DataFrame(columns=['id', 'labels', 'parent', 'value', 'color'])
+    for i, level in enumerate(levels):
+        df_tree = pd.DataFrame(columns=['id', 'labels', 'parent', 'value', 'color'])
+        dfg = df.groupby(levels[i:]).sum()
+        dfg = dfg.reset_index()
+        df_tree['labels'] = dfg[level].copy().astype(str)
+        df_tree['parent'] = ''
+        df_tree['id'] = dfg[level].copy().astype(str)
+        if i &lt; len(levels) - 1:
+            j = i + 1
+            while j &lt; len(levels):
+                df_tree['parent'] = (
+                    dfg[levels[j]].copy().astype(str) + '/' + df_tree['parent']
+                )
+                df_tree['id'] = dfg[levels[j]].copy().astype(str) + '/' + df_tree['id']
+                j += 1
+        df_tree['parent'] = df_tree['parent'].str.rstrip('/')
+        df_tree['value'] = dfg[value_column]
+        df_tree['color'] = dfg[color_columns[0]] / dfg[color_columns[1]]
+        df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
+    return df_all_trees
+</code></pre><p>What we are doing in this function is:</p>
+<ol>
+<li>
+<p>initializing an empty dataframe;</p>
+</li>
+<li>
+<p>looping through the levels of our hierarchy, from the inner to the outer;</p>
+</li>
+<li>
+<p>setting the right parent for each element except for the top of the hierarchy;</p>
+</li>
+<li>
+<p>using an additional <em>id</em> field that prepends the parent to each element to avoid issues with same-name leaves.</p>
+</li>
+</ol>
+<p>This function can look intimidating, but fortunately it is immediate to use. Which arguments does it require? Well, first the actual dataframe; then a list of the columns that we want to use as levels in the hierarchy (in our case, the resolution and the study columns); a column that determines the size of each leaf element (that we won&rsquo;t quite use here); and finally, how to determine the color of each leaf element. One thing must be noticed: for the color, we need a list of <em>two</em> columns; this allows the function to generalise well in other cases, but here we will be using only one column (as we will see very soon).
+Ok, so now, where is the data?</p>
+<h2 id="some-gymnastics-with-pandas">Some gymnastics with <code>pandas</code></h2>
+<p>It is time to extract the data from the spreadsheet and do a bit of gymnastics with <code>pandas</code>. Here it comes:</p>
+<pre><code>
+df = pd.read_excel('dataset.xlsx')
+df['Study'] = df['First author'] + ' et al., ' + df['Year'].astype(str)
+df['Resolution'] = df['Resolution'] + ' resolution'
+
+df['Link'] = df['DOI']
+df['Link'].replace('http',&quot;&quot;&quot;&lt;a style='color:white' href='http&quot;&quot;&quot;,
+                    inplace=True, regex=True)
+df['Link'] = df['Link'] + &quot;&quot;&quot;'&gt;-&gt;Go to the paper&lt;/a&gt;&quot;&quot;&quot;
+
+fields = ['Title', 'Species (n)', 'Age',
+          'Structural measure (diffusion)', 'Functional measure', 'Regions (n)',
+         'Cortical or subcortical', 'Inter- or intra-hemispheric', 'Correlation method']
+df['Summary'] = df['Link'] + '&lt;br&gt;&lt;br&gt;'
+for i in fields:
+    df['Summary'] = df['Summary'] + i + ': ' + df[i].astype(str) + '&lt;br&gt;&lt;br&gt;'
+    
+df['Review'] = 'Straathof et al., 2019'
+df['Count'] = 1
+
+df = df.sort_values('Study')
+
+df_treemap = build_hierarchical_dataframe(df,
+                                            ['Study', 'Resolution', 'Review'],
+                                            'Count', ['Correlation', 'Count'])
+
+</code></pre><p>In this snippets, what we are doing is:</p>
+<ol>
+<li>
+<p>initializing a dataframe directly from the spreadsheet;</p>
+</li>
+<li>
+<p>defining a study columns combining first author and year, and adjusting the resolution column for displaying reasons;</p>
+</li>
+<li>
+<p>doing a little trick to make the DOI become an actual clickable link inside the treemap;</p>
+</li>
+<li>
+<p>looping through the columns we want to include inside each element of the treemap and adding them to a summary column;</p>
+</li>
+<li>
+<p>adding a couple of other column: the review column, that will serve as the top of the hierarchy (the <em>parent of parents</em>), and the count column, which is (literally) a column of ones;</p>
+</li>
+<li>
+<p>calling the function we defined in the previous section.</p>
+</li>
+</ol>
+<p>Why do we need the count field? In this example, we want all the elements of the treemaps to be equal, and as we need to define each element size a column of ones is the easiest way. The count column is also handy to respect the requirement for the color argument of our function.
+We are almost there!</p>
+<h2 id="let-there-be-interactions">Let there be interactions</h2>
+<p>Let&rsquo;s finally generate the figure:</p>
+<pre><code>fig = go.Figure(go.Treemap(
+    ids=df_treemap['id'].tolist(),
+    labels=df_treemap['labels'].tolist(),
+    parents=df_treemap['parent'].tolist(),
+    values=df_treemap['value'].tolist(),
+    branchvalues='total',
+    hovertemplate='&lt;b&gt;%{label}&lt;/b&gt;&lt;br&gt;Correlation: %{color:.2f}',
+    marker=dict(
+        colors=df_treemap['color'],
+        colorscale='cividis',
+        showscale=True),
+    name='',
+    text=df['Summary'],
+    textfont=dict(
+            size=15,
+        )
+    ))
+
+fig = fig.update_layout(
+    title=dict(text='Brain connectivity: structure-function correlation', x=0.1),
+    autosize=False,
+    width=900,
+    height=600,
+    margin=dict(
+        l=100,
+        r=0,
+        b=30,
+        t=60,
+    )
+)
+
+
+</code></pre><p>Apart from <em>stylistical</em> adjustments, what is mainly going on here is that we are finally generating the treemap: aside from using the hierarchical dataframe columns (<code>id</code>, <code>labels</code>, <code>parent</code>, <code>value</code> and <code>color</code>), we are also setting the <code>text</code> and the <code>hovertemplate</code> arguments to define what will appear respectively inside the treemap and when hovering over its elements. Finally, the <code>branchvalues</code> argument will determine how the values of leaves will be combined in parent elements: as we set it to <code>'total'</code>, the size of each parent will be given by the number of leaves. Not only that: from the way the previous function was written, the color of each parent is given by the average of the color column value of its leaves!
+So, where&rsquo;s the figure? Ah, here is it:</p>
+<pre><code>fig.show()
+
+</code></pre><p><em>Behold,</em> an interactive treemap!</p>
+<h2 id="useful-references">Useful references</h2>
+<ul>
+<li>
+<p><a href="https://elifesciences.org/articles/61523/executable" title="Mancini et al., 2020">&ldquo;An interactive meta-analysis of MRI biomarkers of myelin&rdquo;</a></p>
+</li>
+<li>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6360487/" title="Straathof et al., 2019">&ldquo;A systematic review on the quantitative relationship between structural and functional network connectivity strength in mammalian brains&rdquo;</a></p>
+</li>
+<li>
+<p><a href="https://plotly.com/python/" title="Charts and Graphs available in Plotly">Plotly Python Open Source Graphing Library</a></p>
+</li>
+<li>
+<p><a href="https://plotly.com/python/treemaps/" title="Treemap Charts">Treemaps in Plotly</a></p>
+</li>
+<li>
+<p><a href="https://images.plot.ly/plotly-documentation/images/python_cheat_sheet.pdf">Plotly cheat sheet</a></p>
+</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

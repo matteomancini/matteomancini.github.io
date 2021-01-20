@@ -6,14 +6,23 @@
     <description>Recent content in Posts on NeuroSnippets</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Wed, 13 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Interactive treemaps for interactive reviews</title>
+      <link>https://neurosnippets.com/posts/interactive-treemaps/</link>
+      <pubDate>Wed, 20 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/posts/interactive-treemaps/</guid>
+      <description>Beyond rows and columns If you think about a literature review or a meta-analysis, your expectation in terms of format probably reflects the following description: a PDF file containing a large table with the main details from the surveyed studies. This immediate association is the result of some sort of immutability in time of reviews, and more in general scientific papers. But there is no reason for papers to be conservative, static objects.</description>
+    </item>
+    
     <item>
       <title>Making a glass brain</title>
       <link>https://neurosnippets.com/posts/glass-brain/</link>
       <pubDate>Wed, 13 Jan 2021 00:00:00 +0000</pubDate>
       
       <guid>https://neurosnippets.com/posts/glass-brain/</guid>
-      <description>Everything looks better with glass How can we give the deserved credit to white matter pathways in diffusion MRI? Easy: let&amp;rsquo;s throw away everything besides white matter. Jokes aside, tractography can already be a lot to digest, and sometimes we just need a rough reference to understand what we are looking at. If it is true that less is more, glass brains are a simple yet effective idea. In this post, I want to explore one way to make a smooth brain: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette.</description>
+      <description>Everything looks better with glass How can we give the deserved credit to white matter pathways in diffusion MRI? Easy: let&amp;rsquo;s throw away everything besides white matter. Jokes aside, tractography can already be a lot to digest, and sometimes we just need a rough reference to understand what we are looking at. If it is true that less is more, glass brains are a simple yet effective idea. In this post, I want to explore one way to make a smooth brain proposed by Thijs Dhollander: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette.</description>
     </item>
     
   </channel>

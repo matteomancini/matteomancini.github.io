@@ -16,12 +16,25 @@
     <link rel="stylesheet" href="https://neurosnippets.com/css/main.min.9594d69abdd169534d699b3e364130681441a142ca55039d76d678b2eb7141b8.css" />
 
     
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-187589071-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Making a glass brain"/>
-<meta name="twitter:description" content="Everything looks better with glass How can we give the deserved credit to white matter pathways in diffusion MRI? Easy: let&rsquo;s throw away everything besides white matter. Jokes aside, tractography can already be a lot to digest, and sometimes we just need a rough reference to understand what we are looking at. If it is true that less is more, glass brains are a simple yet effective idea. In this post, I want to explore one way to make a smooth brain: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette."/>
+<meta name="twitter:description" content="Everything looks better with glass How can we give the deserved credit to white matter pathways in diffusion MRI? Easy: let&rsquo;s throw away everything besides white matter. Jokes aside, tractography can already be a lot to digest, and sometimes we just need a rough reference to understand what we are looking at. If it is true that less is more, glass brains are a simple yet effective idea. In this post, I want to explore one way to make a smooth brain proposed by Thijs Dhollander: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette."/>
 
     <meta property="og:title" content="Making a glass brain" />
-<meta property="og:description" content="Everything looks better with glass How can we give the deserved credit to white matter pathways in diffusion MRI? Easy: let&rsquo;s throw away everything besides white matter. Jokes aside, tractography can already be a lot to digest, and sometimes we just need a rough reference to understand what we are looking at. If it is true that less is more, glass brains are a simple yet effective idea. In this post, I want to explore one way to make a smooth brain: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette." />
+<meta property="og:description" content="Everything looks better with glass How can we give the deserved credit to white matter pathways in diffusion MRI? Easy: let&rsquo;s throw away everything besides white matter. Jokes aside, tractography can already be a lot to digest, and sometimes we just need a rough reference to understand what we are looking at. If it is true that less is more, glass brains are a simple yet effective idea. In this post, I want to explore one way to make a smooth brain proposed by Thijs Dhollander: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://neurosnippets.com/posts/glass-brain/" />
 <meta property="article:published_time" content="2021-01-13T00:00:00+00:00" />
@@ -113,7 +126,7 @@
     <div class="post-content">
       <h2 id="everything-looks-better-with-glass">Everything looks better with glass</h2>
 <p>How can we give the deserved credit to white matter pathways in diffusion MRI? Easy: let&rsquo;s throw away everything besides white matter. Jokes aside, tractography can already be a lot to digest, and sometimes we just need a rough reference to understand what we are looking at. If it is true that less is more, glass brains are a simple yet effective idea.
-In this post, I want to explore one way to make a smooth brain: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette. A good example of this approach is showed in this <a href="https://academic.oup.com/brain/article/141/3/888/4788771" title="Brain - A Journal of Neurology">paper</a> by Remika Mito and colleagues.</p>
+In this post, I want to explore one way to make a smooth brain proposed by <a href="https://twitter.com/thijsdhollander" title="Thijs Twitter Account">Thijs Dhollander</a>: using the average from several brain masks, and then playing around with image operations to obtain a smooth and thin silhouette. A good example of this approach is showed in this <a href="https://academic.oup.com/brain/article/141/3/888/4788771" title="Brain - A Journal of Neurology">paper</a> by Remika Mito and colleagues.</p>
 <p>The overall bash script to generate the glass brain and the related requirements are on the <a href="https://github.com/matteomancini/neurosnippets/tree/master/brainviz/glass-brain">NeuroSnippets repository</a>.</p>
 <h2 id="first-steps">First steps</h2>
 <p>As sample data, I decided to use the <a href="https://openneuro.org/datasets/ds001378/versions/00003" title="SCA2 Diffusion Tensor Imaging">dataset</a> shared by Mario Mascalchi and colleagues on <a href="https://openneuro.org" title="OpenNeuro">OpenNeuro</a>, relying only on the first sessions of the healthy controls. This dataset can be easily downloaded through <a href="https://www.datalad.org" title="DataLad">DataLad</a>:</p>

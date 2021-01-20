@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on NeuroSnippets</title>
+    <link>https://neurosnippets.com/tags/python/</link>
+    <description>Recent content in python on NeuroSnippets</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <lastBuildDate>Wed, 20 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Interactive treemaps for interactive reviews</title>
+      <link>https://neurosnippets.com/posts/interactive-treemaps/</link>
+      <pubDate>Wed, 20 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/posts/interactive-treemaps/</guid>
+      <description>Beyond rows and columns If you think about a literature review or a meta-analysis, your expectation in terms of format probably reflects the following description: a PDF file containing a large table with the main details from the surveyed studies. This immediate association is the result of some sort of immutability in time of reviews, and more in general scientific papers. But there is no reason for papers to be conservative, static objects.</description>
+    </item>
+    
+  </channel>
+</rss>
