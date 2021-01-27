@@ -3,6 +3,46 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://neurosnippets.com/tags/containers/</loc>
+    <lastmod>2021-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/tags/docker/</loc>
+    <lastmod>2021-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/tags/fmri/</loc>
+    <lastmod>2021-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/tags/fsl/</loc>
+    <lastmod>2021-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/</loc>
+    <lastmod>2021-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/posts/fslfix-in-a-box/</loc>
+    <lastmod>2021-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/posts/</loc>
+    <lastmod>2021-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/tags/</loc>
+    <lastmod>2021-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://neurosnippets.com/tags/dataviz/</loc>
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
   </url>
@@ -13,27 +53,12 @@
   </url>
   
   <url>
-    <loc>https://neurosnippets.com/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://neurosnippets.com/tags/plotly/</loc>
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://neurosnippets.com/posts/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://neurosnippets.com/tags/python/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neurosnippets.com/tags/</loc>
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
   </url>
   

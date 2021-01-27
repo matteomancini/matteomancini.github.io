@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en-uk">
+  <head>
+    <title>One container to rule them all: FSL-FIX in a box // NeuroSnippets</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.76.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Matteo Mancini" />
+    <meta name="description" content="" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <link rel="stylesheet" href="https://neurosnippets.com/css/main.min.9594d69abdd169534d699b3e364130681441a142ca55039d76d678b2eb7141b8.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-187589071-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="One container to rule them all: FSL-FIX in a box"/>
+<meta name="twitter:description" content="&ldquo;Use a container&rdquo; is the new &ldquo;You need a virtual machine&rdquo; I have to be sincere: the first time I heard about containers I was not impressed. It sounded like an exotic approach, and I couldn&rsquo;t see why would you need that. A few years later, I have changed my mind a lot about it: not only containers can be used to create reproducible workflows, but they are also useful in several applications (taken to the extreme in some cases)."/>
+
+    <meta property="og:title" content="One container to rule them all: FSL-FIX in a box" />
+<meta property="og:description" content="&ldquo;Use a container&rdquo; is the new &ldquo;You need a virtual machine&rdquo; I have to be sincere: the first time I heard about containers I was not impressed. It sounded like an exotic approach, and I couldn&rsquo;t see why would you need that. A few years later, I have changed my mind a lot about it: not only containers can be used to create reproducible workflows, but they are also useful in several applications (taken to the extreme in some cases)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neurosnippets.com/posts/fslfix-in-a-box/" />
+<meta property="article:published_time" content="2021-01-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-01-27T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://neurosnippets.com/"><img class="app-header-avatar" src="/img/me.png" alt="Matteo Mancini" /></a>
+      <h1 class="title">NeuroSnippets</h1>
+      <h3 class="author">Matteo Mancini</h3>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             &bull; 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <nav class="app-header-menu">
+        
+        
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/about_me/">About me</a>
+        
+          
+             &bull; 
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/research/">Research</a>
+        
+      </nav>
+      <p>A blog about brains, open-source code and (literally) everything in between.</p>
+      <p><div class="question">Who am I</div> A biomedical engineer, Sir Henry Wellcome Postdoctoral Fellow, on a quest for better brain maps.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/matteomancini" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/ingmatman" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <a name="post"><h1 class ="post-title">One container to rule them all: FSL-FIX in a box</h1></a>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 27, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          8 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+              <a class="tag" href="https://neurosnippets.com/tags/fsl/">fsl</a>
+              <a class="tag" href="https://neurosnippets.com/tags/docker/">docker</a>
+              <a class="tag" href="https://neurosnippets.com/tags/containers/">containers</a>
+              <a class="tag" href="https://neurosnippets.com/tags/fmri/">fMRI</a>
+        </div>
+      </div>
+    </header>
+    
+      <figure>
+        <img class="post-pic" src="https://neurosnippets.com/img/vm_vs_docker.svg">
+        
+          <figcaption>A wedding-cake plot of virtual machines against containers. Still not convinced? How about <a href="https://xkcd.com/1988/">software enlightenment</a>?</figcaption>
+        
+        </figure>
+    
+    <div class="post-content">
+      <h2 id="use-a-container-is-the-new-you-need-a-virtual-machine">&ldquo;Use a container&rdquo; is the new &ldquo;You need a virtual machine&rdquo;</h2>
+<p>I have to be sincere: the first time I heard about containers I was not impressed. It sounded like an <em>exotic</em> approach, and I couldn&rsquo;t see why would you need that. A few years later, I have changed my mind a lot about it: not only containers can be used to create reproducible workflows, but they are also useful in several applications (<a href="https://jonathan.bergknoff.com/journal/run-more-stuff-in-docker/" title="Running almost everything in docker (!)">taken to the extreme in some cases</a>). In this post, I will explore the idea of using a container in a scenario where usually one would have relied on a virtual machine. If after reading this post you still think you need a virtual machine, have a look first at the amazing <a href="https://github.com/NeuroDesk/neurodesk" title="NeuroDesk repository">NeuroDesk</a>.</p>
+<p>The idea for this post came to me when a friend of mine reached out asking for help with a tool that I did not use in a long time: <a href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX" title="FIX page on the FSL website"><code>FIX</code></a>. For those of you who are not familiar with it, it&rsquo;s a collateral tool to <a href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/" title="FSL homepage"><code>FSL</code></a> that can be used to automatically classify the independent components estimated from fMRI data using <code>melodic</code>. To tailor this classification problem, the tool itself can be used for training the classifier on a dataset of interest. My friend, who has just started in the neuroimaging world, was struggling to get it running in a virtual machine. After a bit of <em>remote</em> testing and several error messages, I had an idea: why not just using a container? Here I will show the <code>Dockerfile</code> I came up with and how it can be used not only to run <code>FIX</code>, but also any <code>FSL</code> tool. Both the <code>Dockerfile</code> and the related script are on the <a href="https://github.com/matteomancini/neurosnippets/tree/master/workflows/fslfix-in-a-box">NeuroSnippets repository</a>.</p>
+<h2 id="a-few-hours-of-trial-and-error-later">A few hours of trial-and-error later&hellip;</h2>
+<p>I will not lie: making a <code>Dockerimage</code> for an <em>articulated</em> piece of software is not easy. And <code>FIX</code> is for sure <em>articulated</em>: it combines <code>bash</code>, <code>R</code> and <code>matlab</code>/<code>octave</code>. It is an interesting implementation of the proverb <a href="https://en.wikipedia.org/wiki/With_great_power_comes_great_responsibility" title="Wikipedia">&ldquo;With great power there must also come great responsibility&rdquo;</a> in software. As a result of these <em>multimodal</em> dependencies, making a container out of it can take time. In my case, I think it was a few hours of trial-and-error, but once it is done, you <em>cannot break it anymore</em> (unless you have the <em>unfortunate</em> idea of touching it again). So let&rsquo;s have a look at the sections of the <code>Dockerfile</code>.</p>
+<p>The starting point is picking a base image. Let&rsquo;s start from a <em>user-friendly</em> GNU/Linux distro, and with a stable, supported version &ndash; we will go with Ubuntu Bionic Beaver. This first block in the Dockerfile will take care of pulling this image and install the fundamental stuff (e.g. <code>zip</code>/<code>unzip</code> to handle archives, <code>wget</code> to download files, etc.):</p>
+<pre><code>
+FROM ubuntu:bionic-20201119
+
+# Install fundamental packages
+RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends \
+    lsb-core \
+    bsdtar \
+    zip \
+    unzip \
+    gzip \
+    curl \
+    jq \
+    wget \
+    python-pip \
+    software-properties-common &amp;&amp; \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    
+</code></pre><p>Next on the list is <code>R</code>. An important thing to do before installing <code>r-core</code> and the related packages is to set up the <em>locale</em> settings (mostly timezone and character encoding), otherwise we would be prompted to insert those from the keyboard and we would be stuck. Another important thing is to make sure to get the right version of each package, and to handle the dependencies. Luckily, the <code>FIX</code> documentation is <a href="https://git.fmrib.ox.ac.uk/fsl/fix/-/blob/master/README">quite detailed about it</a>. Here it goes:</p>
+<pre><code>
+#############################################
+# Download and install R and necessary packages
+
+ENV TZ=Europe/Rome
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &amp;&amp; echo $TZ &gt; /etc/timezone &amp;&amp; \
+    apt-get update &amp;&amp; apt-get install -y --no-install-recommends r-base r-cran-devtools \
+        libblas-dev liblapack-dev gfortran r-cran-catools r-cran-gplots g++ &amp;&amp; \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &amp;&amp; \
+    Rscript -e 'require(devtools); install_version(&quot;kernlab&quot;, version=&quot;0.9-24&quot;)' &amp;&amp; \
+    Rscript -e 'require(devtools); install_version(&quot;ROCR&quot;, version=&quot;1.0-7&quot;)' &amp;&amp; \
+    Rscript -e 'require(devtools); install_version(&quot;class&quot;, version=&quot;7.3-14&quot;)' &amp;&amp; \
+    Rscript -e 'require(devtools); install_version(&quot;mvtnorm&quot;, version=&quot;1.0-8&quot;)' &amp;&amp; \
+    Rscript -e 'require(devtools); install_version(&quot;multcomp&quot;, version=&quot;1.4-8&quot;)' &amp;&amp; \
+    Rscript -e 'require(devtools); install_version(&quot;coin&quot;, version=&quot;1.2-2&quot;)' &amp;&amp; \
+    Rscript -e 'require(devtools); install_version(&quot;party&quot;, version=&quot;1.0-25&quot;)' &amp;&amp; \
+    Rscript -e 'require(devtools); install_version(&quot;e1071&quot;, version=&quot;1.6-7&quot;)' &amp;&amp; \
+    Rscript -e 'require(devtools); install_version(&quot;randomForest&quot;, version=&quot;4.6-12&quot;)'
+
+</code></pre><p>It is time for FIX! It is mainly a matter of downloading it and <em>unpacking</em> it where we want it to be (I opted for <code>/opt</code> for no specific reason):</p>
+<pre><code>
+#############################################
+# Download and install FIX
+
+RUN wget -v http://www.fmrib.ox.ac.uk/~steve/ftp/fix.tar.gz &amp;&amp; \
+    mkdir -p /tmp/fix &amp;&amp; \
+    cd /tmp/fix &amp;&amp; \
+    tar zxvf /fix.tar.gz --exclude=&quot;compiled/Darwin/&quot; &amp;&amp; \
+    mv /tmp/fix/fix* /opt/fix &amp;&amp; \
+    rm /fix.tar.gz &amp;&amp; \
+    cd / &amp;&amp; \
+    rm -rf /tmp/* /var/tmp/*
+
+ENV FSL_FIXDIR=/opt/fix
+ENV PATH &quot;$PATH:/opt/fix&quot;
+
+</code></pre><p>Next on the list is Matlab Compiler Runtime. As for the <code>R</code> packages, one needs to pay attention to the specific version required and download <em>that</em> one, and also once again avoid <em>interactive</em> steps:</p>
+<pre><code>
+#############################################
+# Download and install Matlab Compiler Runtime
+
+RUN wget https://ssd.mathworks.com/supportfiles/downloads/R2017b/deployment_files/R2017b/installers/glnxa64/MCR_R2017b_glnxa64_installer.zip &amp;&amp; \
+    mkdir /opt/mcr &amp;&amp; mkdir /mcr-install &amp;&amp; cd mcr-install &amp;&amp; \
+    unzip /MCR_R2017b_glnxa64_installer.zip &amp;&amp; \
+    rm -rf /MCR_R2017b_glnxa64_installer.zip &amp;&amp; \
+    ./install -destinationFolder /opt/mcr -agreeToLicense yes -mode silent &amp;&amp; \
+    cd / &amp;&amp; rm -rf mcr-install
+
+ENV FSL_FIX_MCRROOT=/opt/mcr
+
+</code></pre><p>We are at the last chunk! Here we will be installing <code>FSL</code> from the NeuroDebian repository, in particular <code>fsl-core</code> and <code>fsl-atlases</code>, but also <code>OpenJDK</code> (otherwise <code>mcr</code> will complain). After setting all the <code>FSL</code>-related variables, we will add a non-root user (I mean, we don&rsquo;t need to be root to process fMRI data, so let&rsquo;s just use a normal user as we would do in a <em>real</em> machine):</p>
+<pre><code>
+#############################################
+# Download and install FSL 5 + OpenJDK
+
+RUN apt-get update &amp;&amp; apt-get install -y dirmngr &amp;&amp; \
+    wget -O- http://neuro.debian.net/lists/bionic.de-fzj.full | \
+    tee /etc/apt/sources.list.d/neurodebian.sources.list &amp;&amp; \
+    apt-key adv --recv-keys --keyserver hkp://pool.sks-keyservers.net:80 0xA5D32F012649A5A9 &amp;&amp; \
+    apt-get update &amp;&amp; apt-get install -y fsl-core fsl-atlases openjdk-8-jdk &amp;&amp; \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Configure FSL environment
+ENV FSLDIR=/usr/share/fsl/5.0
+ENV FSL_DIR=&quot;${FSLDIR}&quot;
+ENV FSLOUTPUTTYPE=NIFTI_GZ
+ENV PATH=/usr/lib/fsl/5.0:$PATH
+ENV FSLMULTIFILEQUIT=TRUE
+ENV POSSUMDIR=/usr/share/fsl/5.0
+ENV LD_LIBRARY_PATH=/usr/lib/fsl/5.0:$LD_LIBRARY_PATH
+ENV FSLTCLSH=/usr/bin/tclsh
+ENV FSLWISH=/usr/bin/wish
+ENV FSLOUTPUTTYPE=NIFTI_GZ
+
+#############################################
+# Add non-root user
+
+RUN useradd --create-home --shell /bin/bash fsluser
+USER fsluser
+WORKDIR /home/fsluser
+ENV USER=fsluser
+
+</code></pre><p>And the <code>Dockerfile</code> is complete! Now it is a matter of building and tagging it. As I was planning to upload it to DockerHub, I included also my username in the tag:</p>
+<pre><code>
+docker build -t ingmatman/fslfix:latest .
+
+</code></pre><p>This will take a while, and if you pay attention to the output you can glimpse signs of each step we wrote. Since I have already built and uploaded this image, if you do not want to play with it or do not need to change anything, you can instead pull the whole thing from <a href="https://hub.docker.com/repository/docker/ingmatman/fslfix">DockerHub</a>:</p>
+<pre><code>
+docker pull ingmatman/fslfix:latest
+
+</code></pre><p>And the size is&hellip; 9.43GB! That&rsquo;s big! But once you realise that you have the <em>whole</em> <code>FSL</code> (including the atlases), <code>FIX</code>, <code>R</code> and <code>mcr</code> in there, it does not look that big anymore. After all, we are doing this to avoid using a virtual machine, and a virtual machine probably would have taken that much space.</p>
+<h2 id="welcome-to-the-machine">Welcome to the Machine</h2>
+<p>So now we can use a container to run <code>FIX</code>. To test it, we need some data. As sample data, I have chosen the <a href="https://openneuro.org/datasets/ds000224/versions/1.0.3" title="MSC dataset">Midnight Scan Club dataset</a> (you gotta love the almost <em>speakeasy</em> name) shared by Evan Gordon and colleagues on <a href="https://openneuro.org" title="OpenNeuro">OpenNeuro</a>. As usual, this dataset can be easily downloaded through <a href="https://www.datalad.org" title="DataLad">DataLad</a>:</p>
+<pre><code>datalad install https://github.com/OpenNeuroDatasets/ds000224.git
+
+datalad get -J 4 ds000224/sub-MSC01/ses-*01/
+
+</code></pre><p>As we will be using as a test just the resting-state data (and the related T1-weighted volume) from the first subject, let&rsquo;s copy those files in a single folder to make things easier in a bit:</p>
+<pre><code>
+mkdir fixdata
+
+cp ds000224/sub-MSC01/ses-func01/func/sub-MSC01_ses-func01_task-rest_bold.nii.gz fixdata/sub01_func_rs.nii.gz
+
+cp ds000224/sub-MSC01/ses-struct01/anat/sub-MSC01_ses-struct01_run-01_T1w.nii.gz fixdata/sub01_anat_t1w.gz
+
+</code></pre><p>So now we can preprocess the data. One way to do it is through the GUI in <code>Melodic</code>:</p>
+<pre><code>docker run --net=&quot;host&quot; --env=&quot;DISPLAY&quot; -v=&quot;$HOME/.Xauthority:/home/fsluser/.Xauthority:rw&quot; \
+    -v=&quot;$HOME/fixdata:/home/fsluser/data:rw&quot; ingmatman/fslfix bash -c &quot;Melodic&quot;
+</code></pre><p>We have just done two important things:</p>
+<ol>
+<li>
+<p>we mounted the file <code>.Xauthority</code> from the host in the container &ndash; this will actually make possible to see the GUI running in the container;</p>
+</li>
+<li>
+<p>we mounted the data folder from the host in the container.</p>
+</li>
+</ol>
+<p>Although the <code>.Xauthority</code> trick works in Linux, in macOS and in Windows you actually need to install an X server &ndash; more details are available in <a href="https://cuneyt.aliustaoglu.biz/en/running-gui-applications-in-docker-on-windows-linux-mac-hosts/" title="Running GUI applications in Docker on Windows, Linux and Mac hosts">this post</a>.
+Once we have completed the configuration for the preprocessing, we can either save the configuration in <code>fsf</code> format or run it directly. I would suggest to save it and then run it using <code>melodic</code> (as done here), since the GUI will remain open (and therefore the container will keep running) even after the preprocessing has finished, while running just <code>melodic design.fsf</code> terminates once the preprocessing is done.
+As I have already prepared the configuration file, we can just copy it where we need it and then proceed:</p>
+<pre><code>cp design.fsf fixdata/
+
+docker run --net=&quot;host&quot; --env=&quot;DISPLAY&quot; -v=&quot;$HOME/.Xauthority:/home/fsluser/.Xauthority:rw&quot; \
+    -v=&quot;$HOME/fixdata:/home/fsluser/data:rw&quot; ingmatman/fslfix bash -c &quot;melodic data/design.fsf&quot;
+</code></pre><p>Since the output folder is shared between the container and the host, we can keep track of what is happening in a browser through the <code>report_log.html</code> file. Once the preprocessing is done, we are ready to use <code>FIX</code>:</p>
+<pre><code>docker run --net=&quot;host&quot; --env=&quot;DISPLAY&quot; -v=&quot;$HOME/.Xauthority:/home/fsluser/.Xauthority:rw&quot; \
+    -v=&quot;$HOME/fixdata:/home/fsluser/data:rw&quot; ingmatman/fslfix bash -c &quot;fix data/results.ica /opt/fix/training_files/Standard.RData 20&quot;
+</code></pre><p>That&rsquo;s it!
+One final note: a good habit is to set up an entry point for the container, so one doesn&rsquo;t have to worry about additional stuff to remember. However, in this case I omitted that on purpose: here you have the whole <code>FSL</code> in there, and you can run any of its tools, as you would do in a virtual machine.</p>
+<h2 id="useful-references">Useful references</h2>
+<ul>
+<li>
+<p><a href="https://medium.com/analytics-vidhya/starting-with-docker-bfd74021d5c7" title="From Jennifer Stark">A good intro post on Docker</a></p>
+</li>
+<li>
+<p><a href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FIX" title="FIX page on the FSL website">FIX documentation</a></p>
+</li>
+<li>
+<p><a href="https://openneuro.org/datasets/ds000224/versions/1.0.3" title="OpenNeuro">Midnight Scan Club dataset</a></p>
+</li>
+<li>
+<p><a href="https://github.com/NeuroDesk/neurodesk" title="NeuroDesk repository">Next-level containers to replaces virtual machines: NeuroDesk</a></p>
+</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

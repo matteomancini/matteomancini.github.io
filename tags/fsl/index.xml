@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fsl on NeuroSnippets</title>
+    <link>https://neurosnippets.com/tags/fsl/</link>
+    <description>Recent content in fsl on NeuroSnippets</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <lastBuildDate>Wed, 27 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/fsl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>One container to rule them all: FSL-FIX in a box</title>
+      <link>https://neurosnippets.com/posts/fslfix-in-a-box/</link>
+      <pubDate>Wed, 27 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/posts/fslfix-in-a-box/</guid>
+      <description>&amp;ldquo;Use a container&amp;rdquo; is the new &amp;ldquo;You need a virtual machine&amp;rdquo; I have to be sincere: the first time I heard about containers I was not impressed. It sounded like an exotic approach, and I couldn&amp;rsquo;t see why would you need that. A few years later, I have changed my mind a lot about it: not only containers can be used to create reproducible workflows, but they are also useful in several applications (taken to the extreme in some cases).</description>
+    </item>
+    
+  </channel>
+</rss>
