@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en-uk">
+  <head>
+    <title>Unleashing the dragon: running MRtrix3 in Google Colab // NeuroSnippets</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.76.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Matteo Mancini" />
+    <meta name="description" content="" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <link rel="stylesheet" href="https://neurosnippets.com/css/main.min.9594d69abdd169534d699b3e364130681441a142ca55039d76d678b2eb7141b8.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-187589071-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Unleashing the dragon: running MRtrix3 in Google Colab"/>
+<meta name="twitter:description" content="A day in the life of browsers A random thought crossed my mind last week: with Javascript at the top of programming languages rankings and with so many notebook systems covering most needs, how far are we from doing almost everything in a browser? Do we actually want to do everything in a browser? Postponing the dystopian consequences to the next Black Mirror season, it is true that browsers have become so universal that it makes sense to give access to resources through them."/>
+
+    <meta property="og:title" content="Unleashing the dragon: running MRtrix3 in Google Colab" />
+<meta property="og:description" content="A day in the life of browsers A random thought crossed my mind last week: with Javascript at the top of programming languages rankings and with so many notebook systems covering most needs, how far are we from doing almost everything in a browser? Do we actually want to do everything in a browser? Postponing the dystopian consequences to the next Black Mirror season, it is true that browsers have become so universal that it makes sense to give access to resources through them." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neurosnippets.com/posts/mrtrix3-in-colab/" />
+<meta property="article:published_time" content="2021-02-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-02-03T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://neurosnippets.com/"><img class="app-header-avatar" src="/img/me.png" alt="Matteo Mancini" /></a>
+      <h1 class="title">NeuroSnippets</h1>
+      <h3 class="author">Matteo Mancini</h3>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             &bull; 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <nav class="app-header-menu">
+        
+        
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/about_me/">About me</a>
+        
+          
+             &bull; 
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/research/">Research</a>
+        
+      </nav>
+      <p>A blog about brains, open-source code and (literally) everything in between.</p>
+      <p><div class="question">Who am I</div> A biomedical engineer, Sir Henry Wellcome Postdoctoral Fellow, on a quest for better brain maps.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/matteomancini" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/ingmatman" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <a name="post"><h1 class ="post-title">Unleashing the dragon: running MRtrix3 in Google Colab</h1></a>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Feb 3, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          6 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+              <a class="tag" href="https://neurosnippets.com/tags/dmri/">dMRI</a>
+              <a class="tag" href="https://neurosnippets.com/tags/tips-and-tricks/">tips-and-tricks</a>
+        </div>
+      </div>
+    </header>
+    
+      <figure>
+        <img class="post-pic" src="https://neurosnippets.com/img/drive_peek.gif">
+        
+          <figcaption>Just a normal day in <a href="https://www.commitstrip.com/en/2016/12/22/terminal-forever/">2034</a>, browsing through the MRI data in my Google Drive and peeking at it.</figcaption>
+        
+        </figure>
+    
+    <div class="post-content">
+      <h2 id="a-day-in-the-life-of-browsers">A day in the life of browsers</h2>
+<p>A random thought crossed my mind last week: with Javascript at the <a href="https://redmonk.com/sogrady/2020/07/27/language-rankings-6-20/" title="Javascript did it again">top of programming languages rankings</a> and with so many <a href="https://pg.ucsd.edu/publications/computational-notebooks-design-space_VLHCC-2020.pdf" title="Literally dozens of notebook systems">notebook systems</a> covering most needs, how far are we from doing <em>almost</em> everything in a browser? Do we actually <em>want</em> to do everything in a browser? Postponing the <em>dystopian</em> consequences to the next <em>Black Mirror</em> season, it is true that browsers have become so <em>universal</em> that it makes sense to give access to resources through them. <a href="https://colab.research.google.com" title="Colab">Google Colab</a> is a good example: one has access for free to virtual machines with GPUs or even TPUs through a notebook system. Getting closer to brains, it may seem a limitation that you need to access to all of that mainly through Python - what about other software packages? What if we need to preprocess data before feeding them to neural networks for training purposes? In this post, I will go through a pratical example with <a href="https://www.mrtrix.org" title="MRtrix">MRtrix3</a>, showing how you can install it, how not to have to re-install it every time, and that there may be <em>more</em> to Colab than just notebooks.</p>
+<p>The Jupyter Notebook to reproduce this procedure is on the <a href="https://github.com/matteomancini/neurosnippets/tree/master/tips-and-tricks/mrtrix3-in-colab">NeuroSnippets repository</a>, together with some advices in case you want to try to variate a bit and install ANTs or FSL. You can try all this out directly using this <a href="https://colab.research.google.com/github/matteomancini/neurosnippets/blob/master/tips-and-tricks/mrtrix3-in-colab/mrtrix3_in_colab.ipynb" title="Open in Colab">Google Colab link</a>.</p>
+<h2 id="the-colab-drive-alliance">The Colab-Drive alliance</h2>
+<p>The steps to have MRtrix3 up and running within Colab are pretty much the ones described in the <a href="https://mrtrix.readthedocs.io/en/latest/installation/build_from_source.html">official documentation</a>. But there&rsquo;s a catch: we do not want to reinstall MRtrix3 everytime our Colab session is over. To avoid this, we will use a nice trick - mounting the Google Drive volume directly on Colab and storing MRtrix3 there:</p>
+<pre><code>from google.colab import drive
+drive.mount('/gdrive')
+
+%cd /gdrive/MyDrive
+
+!apt-get install libeigen3-dev libqt5opengl5-dev libqt5svg5-dev libfftw3-dev
+!git clone https://github.com/MRtrix3/mrtrix3.git
+
+%cd mrtrix3
+!chmod +x configure
+!chmod +x build
+!./configure -nogui
+
+!./build
+</code></pre><p>This will take a while. As you can see, apart from getting access to our Drive, the steps are the usual ones for MRtrix3 <em>aficionados</em>. The only differences here are that we are giving up the GUI, and the list of packages installed with <code>apt-get</code> is slightly shorter since some of the libraries are already there.
+Once these steps are done, there is no need to repeat them. Actually, if you do not need to compile a different version of MRtrix3, there is no need to do them at all, since you can directly download the files from <a href="https://drive.google.com/file/d/1AppHBa9cPz2dQsIX8-Ca8r15KGasluFn/view?usp=sharing" title="MRtrix3 for everyone!">this link</a> and put them into your own Drive.
+So once the files are uploaded, here is the first step to do every time you want to use MRtrix3 in Colab:</p>
+<pre><code>import os
+os.environ['PATH'] += &quot;:/gdrive/MyDrive/mrtrix3/bin&quot;
+!chmod +x /gdrive/MyDrive/mrtrix3/bin/*
+</code></pre><p>Now that the system path includes the MRtrix3 binaries and we made sure that they are executable, let&rsquo;s test if things are working. I used <a href="https://dipy.org" title="DiPy"><code>dipy</code></a> to download some data, and then estimated the orientation distribution function (ODF) and the fiber orientation distribution (FOD):</p>
+<pre><code>%cd /root
+!pip install dipy
+
+from dipy.data import fetch_sherbrooke_3shell
+
+fetch_sherbrooke_3shell()
+
+# Time for some processing!
+!dwi2response dhollander -fslgrad /root/.dipy/sherbrooke_3shell/HARDI193.bvec /root/.dipy/sherbrooke_3shell/HARDI193.bval /root/.dipy/sherbrooke_3shell/HARDI193.nii.gz wm.txt gm.txt csf.txt
+
+!dwi2fod msmt_csd -fslgrad /root/.dipy/sherbrooke_3shell/HARDI193.bvec /root/.dipy/sherbrooke_3shell/HARDI193.bval /root/.dipy/sherbrooke_3shell/HARDI193.nii.gz wm.txt wm.nii.gz gm.txt gm.nii.gz csf.txt csf.nii.gz
+</code></pre><p>Done! Unfortunately we are not able to look at the FOD using for example the amazing <a href="https://fury.gl" title="The perfect companion to dipy">FURY</a> library, as for some reason VTK-based tools do not work in Colab. We could use <code>matplotlib</code> to have a look at things like simple slices, but there&rsquo;s something cooler than that: <a href="https://github.com/MRtrix3/mrpeek" title="Peeking at MR data">mrpeek</a> - peeking at the data directly in the terminal (or at least in one that supports <a href="https://github.com/MRtrix3/mrpeek/wiki" title="Check the terminal requirements">sixel encoding</a>). We can easily build it in Colab:</p>
+<pre><code>%cd /gdrive/MyDrive
+!git clone https://github.com/MRtrix3/mrpeek.git
+%cd mrpeek
+!../mrtrix3/build
+</code></pre><p>But then we would need access from a terminal, and we don&rsquo;t have that here. Or do we?</p>
+<h2 id="going-deep-down-the-rabbit-hole">Going deep down the rabbit hole</h2>
+<p>I started this post talking about doing <em>almost everything</em> in a browser, but actually it is not always what we want. Take this very specific case for instance: to run commands in the terminal we need to remember every time to put an exclamation mark at the beginning. Why can&rsquo;t we just use a terminal? Well, yes - we can! It is a matter of:</p>
+<ol>
+<li>setting an SSH server in our Colab instance;</li>
+<li>exposing it in some way.</li>
+</ol>
+<p>The first one is quite feasible, after all we have root privileges within the instance; and we can pull the second one off using a technique called [<em>reverse tunneling</em>](<a href="https://www.howtogeek.com/428413/what-is-reverse-ssh-tunneling-and-how-to-use-it/">https://www.howtogeek.com/428413/what-is-reverse-ssh-tunneling-and-how-to-use-it/</a> A brief explanation of reverse tunneling), where we basically connect from Colab to a strategic server, and then we use that connection to get to Colab itself. To do this we will use <a href="https://ngrok.io/">ngrok</a>, which is free for our simple needs. So let&rsquo;s get started:</p>
+<pre><code># Generate root password
+import random, string
+password = ''.join(random.choice(string.ascii_letters + string.digits) for i in range(20))
+
+# Download ngrok
+!wget -q -c -nc https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+!unzip -qq -n ngrok-stable-linux-amd64.zip
+# Setup sshd
+!apt-get install -qq -o=Dpkg::Use-Pty=0 openssh-server pwgen &gt; /dev/null
+# Set root password
+!echo root:$password | chpasswd
+!mkdir -p /var/run/sshd
+!echo &quot;PermitRootLogin yes&quot; &gt;&gt; /etc/ssh/sshd_config
+!echo &quot;PasswordAuthentication yes&quot; &gt;&gt; /etc/ssh/sshd_config
+!echo &quot;LD_LIBRARY_PATH=/usr/lib64-nvidia&quot; &gt;&gt; /root/.bashrc
+!echo &quot;export LD_LIBRARY_PATH&quot; &gt;&gt; /root/.bashrc
+
+# Run sshd
+get_ipython().system_raw('/usr/sbin/sshd -D &amp;')
+
+# Ask token
+print(&quot;Copy authtoken from https://dashboard.ngrok.com/auth&quot;)
+import getpass
+authtoken = getpass.getpass()
+</code></pre><p>We have just taken care of both setting up <code>sshd</code> and installing <code>ngrok</code>. Since we have also got the authentication token, we just need to launch <code>ngrok</code>, and retrieve the address and password we will use to connect:</p>
+<pre><code># Create tunnel
+!chmod +x ngrok
+get_ipython().system_raw('./ngrok authtoken $authtoken &amp;&amp; ./ngrok tcp 22 &amp;')
+# Get public address
+!curl -s http://localhost:4040/api/tunnels | python3 -c \
+    &quot;import sys, json; print('SSH to: root@', json.load(sys.stdin)['tunnels'][0]['public_url'][6:], sep='')&quot;
+# Print root password
+print(&quot;Root password: {}&quot;.format(password))
+</code></pre><p>That&rsquo;s it! We can now connect to our Colab instance through SSH and use <code>mrpeek</code> from there if we want to. But probably at this point it is clear that a lot can be done in this way (just to throw there the first two ideas that come to mind: processing that bunch of data you had piling up on your Drive? Or, I don&rsquo;t know, using a <em>TPU</em> runtime?).</p>
+<h2 id="useful-references">Useful references</h2>
+<ul>
+<li>
+<p><a href="https://www.suyogjadhav.com/misc/2019/03/28/Using-ANTs-package-on-Google-Colaboratory/">ANTs in Colab</a></p>
+</li>
+<li>
+<p><a href="https://github.com/MRtrix3/mrpeek">mrpeek - for a life in the terminal </a></p>
+</li>
+<li>
+<p><a href="https://netdevops.me/2020/easily-exposing-your-local-resources-with-ngrok-and-fwd/">Usage example of ngrok to expose local resources</a></p>
+</li>
+<li>
+<p><a href="https://github.com/shawwn/colab-tricks">More Google Colab tips and tricks</a></p>
+</li>
+<li>
+<p><a href="https://imadelhanafi.com/posts/google_colal_server/">For those who want to run Jupyter Lab in Colab (!)</a></p>
+</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
