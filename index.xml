@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 03 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Unleashing the dragon: running MRtrix3 in Google Colab</title>
-      <link>https://neurosnippets.com/posts/mrtrix3-in-colab/</link>
+      <link>https://neurosnippets.com/posts/mrtrix-in-colab/</link>
       <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://neurosnippets.com/posts/mrtrix3-in-colab/</guid>
+      <guid>https://neurosnippets.com/posts/mrtrix-in-colab/</guid>
       <description>A day in the life of browsers A random thought crossed my mind last week: with Javascript at the top of programming languages rankings and with so many notebook systems covering most needs, how far are we from doing almost everything in a browser? Do we actually want to do everything in a browser? Postponing the dystopian consequences to the next Black Mirror season, it is true that browsers have become so universal that it makes sense to give access to resources through them.</description>
     </item>
     
