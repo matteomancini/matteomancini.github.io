@@ -6,7 +6,16 @@
     <description>Recent content in Posts on NeuroSnippets</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Wed, 03 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Histogrammers: a dashboard to quickly check MRI data</title>
+      <link>https://neurosnippets.com/posts/mri-histogram/</link>
+      <pubDate>Wed, 10 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/posts/mri-histogram/</guid>
+      <description>All it takes is an ROI When one is dealing with MRI data (especially in the case of quantitative MRI), it is usually a good idea to check how the data are distributed. An example: you picked a myelin water fraction (MWF) map - it is reasonable to expect that the values will be higher in white matter than in grey matter. After this very first quality check, probably you may want to check how things change in different white matter structures.</description>
+    </item>
+    
     <item>
       <title>Unleashing the dragon: running MRtrix3 in Google Colab</title>
       <link>https://neurosnippets.com/posts/mrtrix-in-colab/</link>

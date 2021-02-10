@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en-uk">
+  <head>
+    <title>Histogrammers: a dashboard to quickly check MRI data // NeuroSnippets</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.76.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Matteo Mancini" />
+    <meta name="description" content="" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <link rel="stylesheet" href="https://neurosnippets.com/css/main.min.9594d69abdd169534d699b3e364130681441a142ca55039d76d678b2eb7141b8.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-187589071-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Histogrammers: a dashboard to quickly check MRI data"/>
+<meta name="twitter:description" content="All it takes is an ROI When one is dealing with MRI data (especially in the case of quantitative MRI), it is usually a good idea to check how the data are distributed. An example: you picked a myelin water fraction (MWF) map - it is reasonable to expect that the values will be higher in white matter than in grey matter. After this very first quality check, probably you may want to check how things change in different white matter structures."/>
+
+    <meta property="og:title" content="Histogrammers: a dashboard to quickly check MRI data" />
+<meta property="og:description" content="All it takes is an ROI When one is dealing with MRI data (especially in the case of quantitative MRI), it is usually a good idea to check how the data are distributed. An example: you picked a myelin water fraction (MWF) map - it is reasonable to expect that the values will be higher in white matter than in grey matter. After this very first quality check, probably you may want to check how things change in different white matter structures." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neurosnippets.com/posts/mri-histogram/" />
+<meta property="article:published_time" content="2021-02-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-02-10T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://neurosnippets.com/"><img class="app-header-avatar" src="/img/me.png" alt="Matteo Mancini" /></a>
+      <h1 class="title">NeuroSnippets</h1>
+      <h3 class="author">Matteo Mancini</h3>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             &bull; 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <nav class="app-header-menu">
+        
+        
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/about_me/">About me</a>
+        
+          
+             &bull; 
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/research/">Research</a>
+        
+      </nav>
+      <p>A blog about brains, open-source code and (literally) everything in between.</p>
+      <p><div class="question">Who am I</div> A biomedical engineer, Sir Henry Wellcome Postdoctoral Fellow, on a quest for better brain maps.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/matteomancini" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/ingmatman" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <a name="post"><h1 class ="post-title">Histogrammers: a dashboard to quickly check MRI data</h1></a>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Feb 10, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          7 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+              <a class="tag" href="https://neurosnippets.com/tags/brainviz/">brainviz</a>
+              <a class="tag" href="https://neurosnippets.com/tags/python/">python</a>
+              <a class="tag" href="https://neurosnippets.com/tags/dash/">dash</a>
+              <a class="tag" href="https://neurosnippets.com/tags/mri/">MRI</a>
+        </div>
+      </div>
+    </header>
+    
+      <figure>
+        <img class="post-pic" src="https://neurosnippets.com/img/mri_histo.gif">
+        
+          <figcaption>A useful dashboard to use with a long list of MRI modalities: T1, T2, MWF&hellip; FA? You may want to check the <a href="https://twitter.com/ingmatman/status/1225821734680526851">meme</a> first.</figcaption>
+        
+        </figure>
+    
+    <div class="post-content">
+      <h2 id="all-it-takes-is-an-roi">All it takes is an ROI</h2>
+<p>When one is dealing with MRI data (especially in the case of <a href="http://www.paul-tofts-phd.org.uk/talks/ismrm2010_qmri_abstract.pdf">quantitative MRI</a>), it is usually a good idea to check how the data are distributed. An example: you picked a myelin water fraction (MWF) map - it is reasonable to expect that the values will be higher in white matter than in grey matter. After this very first quality check, probably you may want to check how things change in different white matter structures. An easy way to do that would be plotting a histogram of the data distribution in a given region - except that then you need to fire up (<em>*gasp*</em>) MATLAB. You can plot some histograms in most neuroimaging packages (first tools that come to mind are <code>fsleyes</code>, <code>freeview</code>, <code>itksnap</code>), but unfortunately it is not immediate to create a histogram of a <em>specific</em> area. Truth to be told, you also need to think about defining the ROIs, or picking an atlas. It started as a quick check, but suddenly you are in the middle of processing the whole thing. Is there an easier alternative?</p>
+<p>In this post I show how to leverage the amazing <a href="https://dash.plotly.com/introduction" title="Dash Documentation">Dash</a> framework to put together a tailored dashboard in more or less 100 lines of code - it will allow us to just <em>sketch</em> on top of the image to define our region of interest. To render the dashboard, we can use a Jupyter Notebook (as I will do here, and as you can test immediately on <a href="https://mybinder.org/v2/gh/matteomancini/neurosnippets/master?urlpath=lab/tree/brainviz/mri-histogram/mri-histogram.ipynb">MyBinder</a> or <a href="https://colab.research.google.com/github/matteomancini/neurosnippets/blob/master/brainviz/mri-histogram/mri-histogram.ipynb">Colab</a>) or run it as a <code>flask</code>-based web app. Both these examples and the related requirements are on the <a href="https://github.com/matteomancini/neurosnippets/tree/master/brainviz/mri-histogram">NeuroSnippets repository</a>.</p>
+<h2 id="the-first-blow-is-half-the-dashboard">The first blow is half the dashboard</h2>
+<p>For this example, I decided to use the quantitative T1 map shared by José P. Marques on the <a href="https://github.com/JosePMarques/MP2RAGE-related-scripts" title="MP2RAGE on GitHub">MP2RAGE script repository</a> - MP2RAGE is both a common and simple way to acquire T1-weighted data that can later be used to <a href="https://www.sciencedirect.com/science/article/abs/pii/S1053811909010738">estimate a map of the longitudinal relaxation time</a>. For pure convenience, I cropped and reoriented the original T1 map - the steps are included in a very brief script on <a href="https://github.com/matteomancini/neurosnippets/tree/master/brainviz/mri-histogram/retrieve_data.sh">GitHub</a>.</p>
+<p>So let&rsquo;s start writing down the modules we need and some utility functions:</p>
+<pre><code>from jupyter_dash import JupyterDash
+
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+import nibabel as nib
+import numpy as np
+import plotly.express as px
+from dash.dependencies import Input, Output, State
+from scipy import ndimage
+from skimage import draw
+
+
+def path_to_indices(path):
+    &quot;&quot;&quot;From SVG path to numpy array of coordinates, each row being a (row, col) point
+    &quot;&quot;&quot;
+    indices_str = [
+        el.replace('M', '').replace('Z', '').split(',') for el in path.split('L')
+    ]
+    return np.floor(np.array(indices_str, dtype=float)).astype(np.int)
+
+
+def path_to_mask(path, shape):
+    &quot;&quot;&quot;From SVG path to a boolean array where all pixels enclosed by the path
+    are True, and the other pixels are False.
+    &quot;&quot;&quot;
+    cols, rows = path_to_indices(path).T
+    rr, cc = draw.polygon(rows, cols)
+    mask = np.zeros(shape, dtype=np.bool)
+    mask[rr, cc] = True
+    mask = ndimage.binary_fill_holes(mask)
+    return mask
+</code></pre><p>These two functions come directly from the <a href="https://dash.plotly.com/annotations" title="Image annotations with Dash">Dash documentation</a>, and they will be very useful to first convert any SVG path drawn on top of the image to a list of spatial coordinates, and then use these coordinates to make a mask of our <em>hand-drawn</em> ROI.</p>
+<p>The next step is loading the data and start figuring out the main elements of this dashboard:</p>
+<pre><code># Loading the data and creating the figures
+img = nib.load('T1map_cropped_reoriented.nii.gz')
+data = img.dataobj
+default_view = 2
+default_slice = int(data.shape[default_view]/2)
+view = np.take(data, default_slice, axis=default_view)
+view = view.T
+fig = px.imshow(view, binary_string=True, origin='lower')
+fig.update_layout(dragmode='drawopenpath',
+                  newshape=dict(opacity=0.8, line=dict(color='red', width=2)))
+config = {
+    'modeBarButtonsToAdd': [
+        'drawopenpath',
+        'drawclosedpath',
+        'eraseshape'
+    ]
+}
+fig_hist = px.histogram(data.get_unscaled().ravel())
+fig_hist.update_layout(showlegend=False)
+
+app = JupyterDash(__name__)
+server = app.server
+</code></pre><p>Once the 3D volume is loaded using <code>nibabel</code>, we define preliminarly which plane of view (in this case, the axial one) and which slice (one in the middle) to visualize - we will deal in a bit on how to change those. Then, we first create a figure out of this slice with <code>plotly_express.imshow()</code>, adding the elements we will need to <em>draw</em> on top of it, and then we create a histogram, that at the beginning will show the T1 distribution of the overall volume. And finally, we create the <code>app</code> object.</p>
+<p>It is time to define the layout of our dashboard:</p>
+<pre><code># Defining the layout of the dashboard
+app.layout = html.Div([html.Div([
+        html.Div(
+            [dcc.Dropdown(id=&quot;plane-dropdown&quot;, options=[
+                {'label': 'Axial', 'value': 2},
+                {'label': 'Coronal', 'value': 1},
+                {'label': 'Sagittal', 'value': 0}],
+                value=2),
+             dcc.Graph(id='graph-mri', figure=fig, config=config),
+             dcc.Slider(
+                id='slice-slider',
+                min=0,
+                max=data.shape[default_view] - 1,
+                value=int(data.shape[default_view]/2),
+                step=1)],
+            style={'width': '60%', 'display': 'inline-block', 'padding': '0 0'},
+        ),
+        html.Div(
+            [dcc.Graph(id='graph-histogram', figure=fig_hist)],
+            style={'width': '40%', 'display': 'inline-block', 'padding': '0 0'},
+        ), html.Div(id='test')
+    ])
+])
+</code></pre><p>The general structure is based on two <code>html.Div</code> components (which wrap the related <code>div</code> elements in HTML), the first one containing a dropdown menu (that we will use to change the plane of view), a graph embedding our MRI slice, and a slider (that we will use to move across the slices); in the second element, we have a graph embedding the histogram. Using the <code>style</code> parameters, we arrange them in order to have the first component on left and the second one on the right. Well, the dashboard is designed!</p>
+<h2 id="and-yet-it-does-not-move">&ldquo;And yet it does not move&rdquo;</h2>
+<p>At the moment, everything is quite <em>static</em>: if we try to run the code so far, and make the app rendering, we will be able to see the middle axial slice as already defined, and the histogram for the overall volume. We can already draw on top of the MRI slice, but nothing happens. It&rsquo;s time to make things <em>interactive</em>!
+To be able to <em>navigate</em> the MRI volume and to make our drawings triggering an update in the histogram, we need to define two callback functions - they are identified as such because of the <code>@app.callback</code> decorator. Let&rsquo;s have a look at the first one:</p>
+<pre><code>@app.callback(
+    [Output('graph-mri', 'figure'),
+    Output('slice-slider', 'max'),
+    Output('slice-slider', 'value')],
+    [Input('plane-dropdown', 'value'),
+    Input('slice-slider', 'value')],
+    prevent_initial_call=True)
+def update_plane(plane, vol_slice):
+    ctx = dash.callback_context
+    if ctx.triggered[0]['prop_id'].split('.')[0]=='plane-dropdown':
+        vol_slice = int(data.shape[plane]/2)
+    view = np.take(data, vol_slice, axis=plane)
+    view = view.T
+    fig = px.imshow(view, binary_string=True, origin='lower')
+    fig.update_layout(dragmode='drawopenpath',
+                      newshape=dict(opacity=0.8, line=dict(color='red', width=2)))
+    return [fig, data.shape[plane] - 1, vol_slice]
+</code></pre><p>This function handles the input from two components (the dropdown menu and the slider) and uses as outputs three properties (the graph content, the slider maximum value, and the slider current value). Why is that? As a general case, the size of the volume in each dimension will not be the same, so the slider needs to be updated accordingly. Inside the function, before dealing with updating the figure, we need also to decide if the current <em>position</em> is still acceptable. Consider this case: if the slider is towards the very end in a <em>large</em> dimension, switching the plane of view to a <em>smaller</em> dimension will cause some troubles. To avoid this, we use the <code>callback_context</code> to check which input component caused the triggering of the function, and if it is indeed the dropdown menu, we just reposition the slider in the middle accordingly to the new plane selected. As we now have a nice way to <em>navigate</em> the MRI volume, we are just missing the <em>connection</em> with the histogram:</p>
+<pre><code>@app.callback(
+    Output('graph-histogram', 'figure'),
+    Input('graph-mri', 'relayoutData'),
+    [State('plane-dropdown', 'value'),
+    State('slice-slider', 'value')],
+    prevent_initial_call=True)
+def histo_from_annotation(relayout_data, current_plane, current_slice):
+    if 'shapes' in relayout_data:
+        last_shape = relayout_data['shapes'][-1]
+        view = np.take(data, current_slice, axis=current_plane)
+        view = view.T
+        mask = path_to_mask(last_shape['path'], view.shape)
+        fig = px.histogram(view[mask])
+        fig.update_layout(showlegend=False)
+        return fig
+    else:
+        return dash.no_update
+</code></pre><p>This function <em>couples</em> the MRI slice and the histogram:</p>
+<ol>
+<li>retrieves the most recent path drawn on the slice;</li>
+<li>computes a mask using <code>path_to_mask()</code>;</li>
+<li>generates a histogram of the values within the mask.</li>
+</ol>
+<p>The decorator in this case does not only defines input and output (respectively the MRI slice and the histogram), but also takes into account the <em>state</em> of two objects, the dropdown and slider: this is to make sure that we always refer to the current plane and slice when we create and apply the mask.</p>
+<p>Everything is ready. It is now just a matter of rendering our dashboard:</p>
+<pre><code>app.run_server(mode=&quot;inline&quot;)
+</code></pre><h2 id="useful-references">Useful references</h2>
+<ul>
+<li><a href="https://dash.plotly.com/introduction" title="Dash Documentation">What is Dash</a></li>
+<li><a href="https://github.com/JosePMarques/MP2RAGE-related-scripts" title="MP2RAGE on GitHub">MP2RAGE Script Repository</a></li>
+<li><a href="https://www.sciencedirect.com/science/article/abs/pii/S1053811909010738" title="Marques et al., 2010">&ldquo;MP2RAGE, a self bias-field corrected sequence for improved segmentation and T1-mapping at high field&rdquo;</a></li>
+<li><a href="https://dash.plotly.com/annotations" title="Dash Documentation">Image annotations with Dash</a></li>
+<li><a href="https://dash.plotly.com/slicer" title="Dash Documentation">Taking the visualization further: dash-slicer</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
