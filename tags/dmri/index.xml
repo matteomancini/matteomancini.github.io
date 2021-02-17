@@ -6,7 +6,16 @@
     <description>Recent content in dMRI on NeuroSnippets</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Wed, 03 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/dmri/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/dmri/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Grind those brains! Diffusion MRI preprocessing with papermill</title>
+      <link>https://neurosnippets.com/posts/papermill-preproc/</link>
+      <pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/posts/papermill-preproc/</guid>
+      <description>Notebooks: you love them or you hate them Notebooks are an interesting beast: they have become extremely diverse and popular, everyone loves them, from declared non-programmers to enthusiastic pythonistas, from Kaggle fans to scientists. Well, that&amp;rsquo;s not exactly true: notebooks are actually one of those things that you end up loving them or strongly feeling against them - with indifference being very rare and usually due to not having interacted with them a lot.</description>
+    </item>
+    
     <item>
       <title>Unleashing the dragon: running MRtrix3 in Google Colab</title>
       <link>https://neurosnippets.com/posts/mrtrix-in-colab/</link>

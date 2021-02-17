@@ -3,6 +3,46 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://neurosnippets.com/tags/dmri/</loc>
+    <lastmod>2021-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/tags/fsl/</loc>
+    <lastmod>2021-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/posts/papermill-preproc/</loc>
+    <lastmod>2021-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/tags/mrtrix3/</loc>
+    <lastmod>2021-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/</loc>
+    <lastmod>2021-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/posts/</loc>
+    <lastmod>2021-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/tags/python/</loc>
+    <lastmod>2021-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/tags/</loc>
+    <lastmod>2021-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://neurosnippets.com/tags/brainviz/</loc>
     <lastmod>2021-02-10T00:00:00+00:00</lastmod>
   </url>
@@ -20,36 +60,6 @@
   <url>
     <loc>https://neurosnippets.com/tags/mri/</loc>
     <lastmod>2021-02-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neurosnippets.com/</loc>
-    <lastmod>2021-02-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neurosnippets.com/posts/</loc>
-    <lastmod>2021-02-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neurosnippets.com/tags/python/</loc>
-    <lastmod>2021-02-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neurosnippets.com/tags/</loc>
-    <lastmod>2021-02-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neurosnippets.com/tags/dmri/</loc>
-    <lastmod>2021-02-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neurosnippets.com/tags/mrtrix3/</loc>
-    <lastmod>2021-02-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -74,11 +84,6 @@
   
   <url>
     <loc>https://neurosnippets.com/tags/fmri/</loc>
-    <lastmod>2021-01-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neurosnippets.com/tags/fsl/</loc>
     <lastmod>2021-01-27T00:00:00+00:00</lastmod>
   </url>
   
