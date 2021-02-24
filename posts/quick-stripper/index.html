@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en-uk">
+  <head>
+    <title>The skull-strip club: quick visual skull-stripping with FSL BET and Streamlit // NeuroSnippets</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.76.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Matteo Mancini" />
+    <meta name="description" content="" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <link rel="stylesheet" href="https://neurosnippets.com/css/main.min.9594d69abdd169534d699b3e364130681441a142ca55039d76d678b2eb7141b8.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-187589071-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The skull-strip club: quick visual skull-stripping with FSL BET and Streamlit"/>
+<meta name="twitter:description" content="You can leave your brain on One of the first steps almost every neuroimaging pipeline has to do is skull-stripping, to free the brain from its cage and start doing registration, segmentation, *insert here any processing you are into* , the list is long. There are many tools to accomplish that, I personally use FreeSurfer and despite the associated time cost (FastSurfer may be a solution though) I am happy about it."/>
+
+    <meta property="og:title" content="The skull-strip club: quick visual skull-stripping with FSL BET and Streamlit" />
+<meta property="og:description" content="You can leave your brain on One of the first steps almost every neuroimaging pipeline has to do is skull-stripping, to free the brain from its cage and start doing registration, segmentation, *insert here any processing you are into* , the list is long. There are many tools to accomplish that, I personally use FreeSurfer and despite the associated time cost (FastSurfer may be a solution though) I am happy about it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neurosnippets.com/posts/quick-stripper/" />
+<meta property="article:published_time" content="2021-02-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-02-24T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://neurosnippets.com/"><img class="app-header-avatar" src="/img/me.png" alt="Matteo Mancini" /></a>
+      <h1 class="title">NeuroSnippets</h1>
+      <h3 class="author">Matteo Mancini</h3>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             &bull; 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <nav class="app-header-menu">
+        
+        
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/about_me/">About me</a>
+        
+          
+             &bull; 
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/research/">Research</a>
+        
+      </nav>
+      <p>A blog about brains, open-source code and (literally) everything in between.</p>
+      <p><div class="question">Who am I</div> A biomedical engineer, Sir Henry Wellcome Postdoctoral Fellow, on a quest for better brain maps.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/matteomancini" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/ingmatman" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <a name="post"><h1 class ="post-title">The skull-strip club: quick visual skull-stripping with FSL BET and Streamlit</h1></a>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Feb 24, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+              <a class="tag" href="https://neurosnippets.com/tags/brainviz/">brainviz</a>
+              <a class="tag" href="https://neurosnippets.com/tags/python/">python</a>
+              <a class="tag" href="https://neurosnippets.com/tags/streamlit/">streamlit</a>
+              <a class="tag" href="https://neurosnippets.com/tags/fsl/">fsl</a>
+              <a class="tag" href="https://neurosnippets.com/tags/mri/">MRI</a>
+        </div>
+      </div>
+    </header>
+    
+      <figure>
+        <img class="post-pic" src="https://neurosnippets.com/img/stripper.gif">
+        
+          <figcaption>Who does not like a balloon (<a href="https://xkcd.com/1226/">without internet!</a>) to celebrate?</figcaption>
+        
+        </figure>
+    
+    <div class="post-content">
+      <h2 id="you-can-leave-your-brain-on">You can leave your brain on</h2>
+<p>One of the first steps almost every neuroimaging pipeline has to do is <em>skull-stripping</em>, to <em>free</em> the brain from its cage and start doing registration, segmentation, <em>*insert here any processing you are into*</em> , the list is long. There are many tools to accomplish that, I personally use FreeSurfer and despite the associated time cost (FastSurfer may be a solution though) I am happy about it. Regardless of your method of choice, when we need a way to quickly skull-strip a brain and we do not have a trained neural network handy, we still turn to the <em>good ol'</em> <a href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/" title="FSL Homepage">FSL</a> and fire <a href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/BET/UserGuide" title="BET User Guide">BET</a> up. In my experience, most of the times it will just work. When it doesn&rsquo;t, you may need to change the fractional intensity threshold - that will unfortunately require some trial and error: <code>bet -f 0.4</code>, <code>fsleyes</code>, <em>&ldquo;Still not good enough&rdquo;</em>, <code>bet -f 0.45</code>, <code>fsleyes</code>, <em>&ldquo;Argh, almost there!&quot;</em>. How can we make this whole process smoother? Did anyone say dashboard?</p>
+<p>In this post, I will show how to make a suitable dashboard for this scenario in <em>less than 50 lines of code</em> with the amazing <a href="https://www.streamlit.io" title="Streamlit">Streamlit</a>. As we will see, the most amazing thing about Streamlit is how few lines of code are needed to turn a simple script in an actual dashboard. This example and the related requirements are on the <a href="https://github.com/matteomancini/neurosnippets/tree/master/brainviz/quick-stripper">NeuroSnippets repository</a> (together with some tips if you want to run Streamlit on Colab or Binder).</p>
+<h2 id="strip-fast-rest-young">Strip fast, rest young</h2>
+<p>Let&rsquo;s start from importing the necessary packages and defining a couple of functions:</p>
+<pre><code>import nibabel as nib
+import numpy as np
+import streamlit as st
+import matplotlib.pyplot as plt
+import os
+
+
+def file_selector(folder_path='.'):
+    filenames = [f for f in os.listdir(folder_path) if f.endswith(&quot;.nii&quot;) or f.endswith(&quot;.gz&quot;)]
+    selected_filename = st.sidebar.selectbox('Select a file', filenames)
+    if selected_filename is None:
+        return None
+    return os.path.join(folder_path, selected_filename)
+
+
+def plot_zslice(vol, overlay, z):
+    fig, ax = plt.subplots()
+    plt.axis('off')
+    zslice = vol[:, :, z]
+    ax.imshow(zslice.T, origin='lower', cmap='gray')
+    if os.path.exists(overlay):
+        mask = nib.load(overlay)
+        mask_data = mask.get_fdata()
+        if mask_data.shape == vol.shape:
+            zslice = mask_data[:, :, z]
+            ax.imshow(zslice.T, origin='lower', alpha=0.5)
+    return fig
+</code></pre><p>In the first function, we are using our first <code>streamlit</code> component: a <code>selectbox</code>, placed in the <code>sidebar</code>. Embedding the <code>selectbox</code> within a function is a quick way to make a tailored dropdown menu, in our case to select files with extensions <code>nii</code> or <code>gz</code> from a given folder. The second function does not do any <code>streamlit</code> <em>magic</em>, but takes care of creating a plot of a given slice from our MRI volume, and if an overlay volume exists (the brain mask, as we will see very shortly), it plots also that one on top of the actual image, with some transparency.</p>
+<p>Let&rsquo;s continue with more <code>streamlit</code> goodness:</p>
+<pre><code>st.sidebar.title('BET explorer')
+filename = file_selector()
+threshold = st.sidebar.slider('Fractional intensity threshold', 0.0, 1.0, 0.5)
+overlay = 'brain_mask.nii.gz'
+</code></pre><p>The <code>title</code> and <code>slider</code> components are exactly what we expect: a title and a slider, respectively. The <code>slider</code> component is quite interesting, as every time we interact with it, the value of <code>threshold</code> will change, and everything else depending on it will be updated without needing any additional code. We also create the <code>selectbox</code> we mentioned through the function we defined.</p>
+<p>It&rsquo;s time to see how all these objects interact with each other:</p>
+<pre><code>if filename is not None:
+    img = nib.load(filename)
+    img_data = img.get_fdata()
+
+    if st.sidebar.button('Run BET'):
+        st.sidebar.write(f'Running bet with f={threshold}...')
+        st.spinner(text='In progress...')
+        os.system(f'bet {filename} brain.nii.gz -m -f {threshold}')
+        st.balloons()
+        st.sidebar.write('...Done!')
+
+    zlen = img_data.shape[2]
+    z = st.slider('Slice', 0, zlen, int(zlen/2))
+    fig = plot_zslice(img_data, overlay, z)
+    plot = st.pyplot(fig)
+</code></pre><p>Once <code>filename</code> has a legal value, we will load the related data using <code>nibabel</code>. Then we have a quite <em>dense</em> nested <code>if</code> statement: not only we define a <code>button</code> component in the <code>sidebar</code>, but we also declare that once it is pressed, <code>bet</code> will be run - since we used the <code>-m</code> parameter, a brain mask (named <code>brain_mask.nii.gz</code>) will be also created. To keep track of the progress, we are also using some messages, the <code>spinner</code> component (which will show up in the upper right corner), and, icing on the cake, the <code>balloons</code> component (you need to try it to appreciate it!). And that&rsquo;s it, less than 50 lines of code!</p>
+<h2 id="just-show-me-the-brain-and-the-balloons">Just show me the brain (and the balloons!)</h2>
+<p>It&rsquo;s time to take this dashboard for a spin. For this example, I chose the <a href="https://openneuro.org/datasets/ds001506/versions/1.3.1" title="Deep Image Reconstruction">Deep Image Reconstruction dataset</a> shared by Shuntaro Aoki and colleagues on <a href="https://openneuro.org" title="OpenNeuro">OpenNeuro</a>, but as it is just a matter of finding T1-weighted data, basically you can pick almost any dataset. As usual, we can download the data through <a href="https://www.datalad.org" title="DataLad">DataLad</a>:</p>
+<pre><code>datalad install https://github.com/OpenNeuroDatasets/ds001506.git
+datalad get -J 4 ds001506/sub-01/ses-anatomy/anat/sub-01_ses-anatomy_T1w.nii.gz 
+</code></pre><p>Let&rsquo;s make sure that the data has the standard orientation:</p>
+<pre><code>fslreorient2std ds001506/sub-01/ses-anatomy/anat/sub-01_ses-anatomy_T1w.nii.gz T1w_reoriented.nii.gz
+</code></pre><p>We are ready to go! It is just a matter of firing <code>streamlit</code> up:</p>
+<pre><code>streamlit run quick_stripper.py 
+</code></pre><h2 id="useful-references">Useful references</h2>
+<ul>
+<li><a href="https://www.streamlit.io" title="Streamlit">Streamlit</a></li>
+<li><a href="https://share.streamlit.io/manik456/brain_tumor_classifier/main/new_brain.py" title="Streamlit Gallery">A Streamlit example for neuroimaging: tumor detection</a></li>
+<li><a href="https://openneuro.org/datasets/ds001506/versions/1.3.1" title="OpenNeuro">Deep Image Reconstruction dataset</a></li>
+<li><a href="http://dx.doi.org/10.1371/journal.pcbi.1006633" title="Shen et al. 2019">&ldquo;Deep image reconstruction from human brain activity&rdquo;</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

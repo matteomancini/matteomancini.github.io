@@ -6,7 +6,16 @@
     <description>Recent content in fsl on NeuroSnippets</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Wed, 17 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/fsl/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/fsl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The skull-strip club: quick visual skull-stripping with FSL BET and Streamlit</title>
+      <link>https://neurosnippets.com/posts/quick-stripper/</link>
+      <pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/posts/quick-stripper/</guid>
+      <description>You can leave your brain on One of the first steps almost every neuroimaging pipeline has to do is skull-stripping, to free the brain from its cage and start doing registration, segmentation, *insert here any processing you are into* , the list is long. There are many tools to accomplish that, I personally use FreeSurfer and despite the associated time cost (FastSurfer may be a solution though) I am happy about it.</description>
+    </item>
+    
     <item>
       <title>Grind those brains! Diffusion MRI preprocessing with papermill</title>
       <link>https://neurosnippets.com/posts/papermill-preproc/</link>
