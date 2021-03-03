@@ -6,7 +6,16 @@
     <description>Recent content in plotly on NeuroSnippets</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Wed, 20 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/plotly/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/plotly/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Interactive brain networks</title>
+      <link>https://neurosnippets.com/posts/interactive-network/</link>
+      <pubDate>Wed, 03 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/posts/interactive-network/</guid>
+      <description>If you don&amp;rsquo;t make it interactive, enjoy only half I spent already a few posts on the topic of making ordinary stuff interactive, and despite the chances of literally wooing people when they see the final results, I think the final result is not the biggest selling point of interactive visualization. I think that what really makes interactive visualization great is the fact that makes it easier to explore the data without having to minimize the Jupyter Notebook, opening the terminal, looking for the file, opening fsleyes, and, wait, what was that I wanted to look at?</description>
+    </item>
+    
     <item>
       <title>Interactive treemaps for interactive reviews</title>
       <link>https://neurosnippets.com/posts/interactive-treemaps/</link>

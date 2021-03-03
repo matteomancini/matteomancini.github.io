@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en-uk">
+  <head>
+    <title>Interactive brain networks // NeuroSnippets</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.76.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Matteo Mancini" />
+    <meta name="description" content="" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <link rel="stylesheet" href="https://neurosnippets.com/css/main.min.9594d69abdd169534d699b3e364130681441a142ca55039d76d678b2eb7141b8.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-187589071-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Interactive brain networks"/>
+<meta name="twitter:description" content="If you don&rsquo;t make it interactive, enjoy only half I spent already a few posts on the topic of making ordinary stuff interactive, and despite the chances of literally wooing people when they see the final results, I think the final result is not the biggest selling point of interactive visualization. I think that what really makes interactive visualization great is the fact that makes it easier to explore the data without having to minimize the Jupyter Notebook, opening the terminal, looking for the file, opening fsleyes, and, wait, what was that I wanted to look at?"/>
+
+    <meta property="og:title" content="Interactive brain networks" />
+<meta property="og:description" content="If you don&rsquo;t make it interactive, enjoy only half I spent already a few posts on the topic of making ordinary stuff interactive, and despite the chances of literally wooing people when they see the final results, I think the final result is not the biggest selling point of interactive visualization. I think that what really makes interactive visualization great is the fact that makes it easier to explore the data without having to minimize the Jupyter Notebook, opening the terminal, looking for the file, opening fsleyes, and, wait, what was that I wanted to look at?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neurosnippets.com/posts/interactive-network/" />
+<meta property="article:published_time" content="2021-03-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-03-03T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://neurosnippets.com/"><img class="app-header-avatar" src="/img/me.png" alt="Matteo Mancini" /></a>
+      <h1 class="title">NeuroSnippets</h1>
+      <h3 class="author">Matteo Mancini</h3>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             &bull; 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <nav class="app-header-menu">
+        
+        
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/about_me/">About me</a>
+        
+          
+             &bull; 
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/research/">Research</a>
+        
+      </nav>
+      <p>A blog about brains, open-source code and (literally) everything in between.</p>
+      <p><div class="question">Who am I</div> A biomedical engineer, Sir Henry Wellcome Postdoctoral Fellow, on a quest for better brain maps.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/matteomancini" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/ingmatman" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <a name="post"><h1 class ="post-title">Interactive brain networks</h1></a>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 3, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+              <a class="tag" href="https://neurosnippets.com/tags/python/">python</a>
+              <a class="tag" href="https://neurosnippets.com/tags/brainviz/">brainviz</a>
+              <a class="tag" href="https://neurosnippets.com/tags/plotly/">plotly</a>
+        </div>
+      </div>
+    </header>
+    
+      <figure>
+        <img class="post-pic" src="https://neurosnippets.com/img/network.gif">
+        
+          <figcaption>I should probably stop making GIFs, but for some reason <a href="https://www.commitstrip.com/en/2016/02/18/gifs-you-need-to-stop-now/?">they do not listen</a>.</figcaption>
+        
+        </figure>
+    
+    <div class="post-content">
+      <h2 id="if-you-dont-make-it-interactive-enjoy-only-half">If you don&rsquo;t make it interactive, enjoy only half</h2>
+<p>I spent already a few posts on the topic of making ordinary stuff <em>interactive</em>, and despite the chances of literally <em>wooing</em> people when they see the final results, I think the final result is not the biggest selling point of interactive visualization. I think that what really makes interactive visualization great is the fact that makes it easier to <em>explore</em> the data without having to minimize the Jupyter Notebook, opening the terminal, looking for the file, opening <code>fsleyes</code>, and, wait, <em>what</em> was that I wanted to look at? An interactive figure may have the answer already there.</p>
+<p>Following this line of thought, in this post I want to show another potentially interesting application for interactive tools: networks, especially brain networks! It&rsquo;s not that there aren&rsquo;t tools to visualize networks (<a href="https://gephi.org" title="Gephi">Gephi</a> and <a href="https://www.nitrc.org/projects/bnv/" title="BNV @ NITRC">BrainNet Viewer</a> come to mind, but also <a href="https://mrtrix.readthedocs.io/en/latest/quantitative_structural_connectivity/connectome_tool.html" title="Connectome visualization tool">MRtrix3</a> itself) - but being able to quickly generate an interactive plot to see how a network looks like and which node has that weird connectivity pattern can be quite handy. And as in most cases, we can quickly achieve a nice result using <a href="https://plotly.com/python/" title="Plotly for Python"><code>plotly</code></a>.</p>
+<p>The Jupyter Notebook to generate the interactive network graph and the related requirements are on the <a href="https://github.com/matteomancini/neurosnippets/tree/master/brainviz/interactive-network">NeuroSnippets repository</a>. To try it out directly from the browser, you can use <a href="https://colab.research.google.com/github/matteomancini/neurosnippets/blob/master/brainviz/interactive-network/interactive_network.ipynb" title="Open in Colab">Google Colab</a> or <a href="https://mybinder.org/v2/gh/matteomancini/neurosnippets/master?filepath=brainviz/interactive-network/interactive_network.ipynb" title="Open in MyBinder">MyBinder</a>.</p>
+<h2 id="gimme-a-network-and-ill-make-it-a-brain-network">Gimme a network and I&rsquo;ll make it a brain network</h2>
+<p>Rather than starting from MRI data and getting lost in the pre-processing (maybe the topic of another post?), I decided to start from a connectivity matrix - a lot of them are available on the <a href="http://umcd.humanconnectomeproject.org/umcd/default/update/8" title="UMCD">USC Multimodal Connectivity Database</a>, I picked a random structural one based on FreeSurfer&rsquo;s <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/CorticalParcellation" title="FreeSurfer wiki">Desikan-Killiany atlas</a>. To give some <em>context</em> to the overall result, I also added the left half of the transparent brain surface from <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/TestingFreeSurfer" title="Testing FreeSurfer"><em>bert</em></a>. Despite not being the same subject as the one used for the network, the result is qualitatively aligned, as we will see at the very end.</p>
+<p>But how do we visualize a surface from FreeSurfer in plotly?  I believe that there may be several ways - the one I picked is converting the surface in ASCII with <code>mris_convert</code>, and then to the <code>.obj</code> format (as explained <a href="https://brainder.org/2012/05/08/importing-freesurfer-cortical-meshes-into-blender/" title="brainder.org">here</a>). The resulting file is already available on the <a href="https://github.com/matteomancini/neurosnippets/tree/master/brainviz/interactive-network">NeuroSnippets repository</a>, as well as a script to reproduce these two conversions. Once we have a file in <code>.obj</code>, we need to read it and extract the vertices and faces to render them as a mesh (a detailed explanation is available <a href="https://chart-studio.plotly.com/~empet/15040/plotly-mesh3d-from-a-wavefront-obj-f/#/">here</a>). Let&rsquo;s start the code right from here, with importing the relevant packages and defining a function to <em>parse</em> an <code>.obj</code> file:</p>
+<pre><code>
+import numpy as np
+import plotly.graph_objects as go
+
+
+def obj_data_to_mesh3d(odata):
+    # odata is the string read from an obj file
+    vertices = []
+    faces = []
+    lines = odata.splitlines()   
+   
+    for line in lines:
+        slist = line.split()
+        if slist:
+            if slist[0] == 'v':
+                vertex = np.array(slist[1:], dtype=float)
+                vertices.append(vertex)
+            elif slist[0] == 'f':
+                face = []
+                for k in range(1, len(slist)):
+                    face.append([int(s) for s in slist[k].replace('//','/').split('/')])
+                if len(face) &gt; 3: # triangulate the n-polyonal face, n&gt;3
+                    faces.extend([[face[0][0]-1, face[k][0]-1, face[k+1][0]-1] for k in range(1, len(face)-1)])
+                else:    
+                    faces.append([face[j][0]-1 for j in range(len(face))])
+            else: pass
+    
+    
+    return np.array(vertices), np.array(faces)   
+</code></pre><p>The function may look a big <em>enigmatic</em> without having a look at <a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file">how an <code>.obj</code> file is structured</a>, but then it should be straightforward.
+Now that we have a way to handle the brain surface, let&rsquo;s focus on the actual network graph. First, we will need to read the connectivity matrix, as well as the nodes' coordinates (otherwise it will not look like a brain!) and labels:</p>
+<pre><code>
+cmat = np.loadtxt('icbm_fiber_mat.txt')
+nodes = np.loadtxt('fs_region_centers_68_sort.txt')
+
+labels=[]
+with open(&quot;freesurfer_regions_68_sort_full.txt&quot;, &quot;r&quot;) as f:
+    for line in f:
+        labels.append(line.strip('\n'))
+
+</code></pre><p>To display nodes and edges in 3D we will use <code>Scatter3D</code> from <code>plotly.graph_objects</code>. The nodes' coordinates are ready to be displayed as <em>dots</em>, but the edges need to be defined as lines connecting the nodes:</p>
+<pre><code>[source, target] = np.nonzero(np.triu(cmat)&gt;0.01)
+
+nodes_x = nodes[:,0]
+nodes_y = nodes[:,1]
+nodes_z = nodes[:,2]
+
+edge_x = []
+edge_y = []
+edge_z = []
+for s, t in zip(source, target):
+    edge_x += [nodes_x[s], nodes_x[t]]
+    edge_y += [nodes_y[s], nodes_y[t]]
+    edge_z += [nodes_z[s], nodes_z[t]]
+
+
+</code></pre><p>Now we have everything to visualize the network in 3D! It is time to read the data for the brain surface and use the function we defined at the beginning:</p>
+<pre><code>with open(&quot;lh.pial.obj&quot;, &quot;r&quot;) as f:
+    obj_data = f.read()
+[vertices, faces] = obj_data_to_mesh3d(obj_data)
+
+vert_x, vert_y, vert_z = vertices[:,:3].T
+face_i, face_j, face_k = faces.T
+</code></pre><p>We are at the very end - the last step is creating a figure and adding all the elements (the nodes, the edges, the surface) as distinct <em>traces</em>:</p>
+<pre><code>fig = go.Figure()
+
+fig.add_trace(go.Mesh3d(x=vert_x, y=vert_y, z=vert_z, i=face_i, j=face_j, k=face_k,
+                        color='pink', opacity=0.25, name='', showscale=False, hoverinfo='none'))
+
+fig.add_trace(go.Scatter3d(x=nodes_x, y=nodes_y, z=nodes_z, text=labels,
+                           mode='markers', hoverinfo='text', name='Nodes'))
+fig.add_trace(go.Scatter3d(x=edge_x, y=edge_y, z=edge_z,
+                           mode='lines', hoverinfo='none', name='Edges'))
+
+fig.update_layout(
+    scene=dict(
+        xaxis=dict(showticklabels=False, visible=False),
+        yaxis=dict(showticklabels=False, visible=False),
+        zaxis=dict(showticklabels=False, visible=False),
+    ),
+    width=800, height=600
+)
+
+fig.show()
+</code></pre><p>And here is our interactive brain network!</p>
+<h2 id="useful-references">Useful references</h2>
+<ul>
+<li>
+<p><a href="http://umcd.humanconnectomeproject.org/umcd/default/update/8" title="UMCD">USC Multimodal Connectivity Database</a></p>
+</li>
+<li>
+<p><a href="https://brainder.org/2012/05/08/importing-freesurfer-cortical-meshes-into-blender/" title="brainder.org">Converting FreeSurfer mesh to <code>.obj</code> files</a></p>
+</li>
+<li>
+<p><a href="https://chart-studio.plotly.com/~empet/15040/plotly-mesh3d-from-a-wavefront-obj-f/#/">3D meshes from <code>.obj</code> files</a></p>
+</li>
+<li>
+<p><a href="https://plotly.com/python/v3/3d-network-graph/" title="Plotly documentation">3D networks with Plotly</a></p>
+</li>
+<li>
+<p><a href="https://plotly.com/python/3d-mesh/" title="Plotly documentation">3D meshes with Plotly</a></p>
+</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
