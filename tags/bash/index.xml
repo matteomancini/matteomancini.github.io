@@ -6,7 +6,16 @@
     <description>Recent content in bash on NeuroSnippets</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Wed, 13 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/bash/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/bash/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Every bundle counts - A recipe for bundle-wise, myelin-weighted connectomes</title>
+      <link>https://neurosnippets.com/posts/bundle-connectome/</link>
+      <pubDate>Wed, 10 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/posts/bundle-connectome/</guid>
+      <description>Esoteric connectomes Graphs are straightforward objects: you have a bunch of nodes, some of them are inter-connected by edges, and it all makes sense. It is in real-world networks that things become complicated: what&amp;rsquo;s a node? What&amp;rsquo;s an edge? When it comes to the brain, the answers to these questions depend on what scale one is targeting, and what tools has available. For whole-brain, structural connectivity, the usual approach is to use tractography, and then count how many streamlines there are between each pair of regions to weight the associated graph.</description>
+    </item>
+    
     <item>
       <title>Making a glass brain</title>
       <link>https://neurosnippets.com/posts/glass-brain/</link>

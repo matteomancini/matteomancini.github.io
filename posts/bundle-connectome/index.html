@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en-uk">
+  <head>
+    <title>Every bundle counts - A recipe for bundle-wise, myelin-weighted connectomes // NeuroSnippets</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.76.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Matteo Mancini" />
+    <meta name="description" content="" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <link rel="stylesheet" href="https://neurosnippets.com/css/main.min.9594d69abdd169534d699b3e364130681441a142ca55039d76d678b2eb7141b8.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-187589071-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Every bundle counts - A recipe for bundle-wise, myelin-weighted connectomes"/>
+<meta name="twitter:description" content="Esoteric connectomes Graphs are straightforward objects: you have a bunch of nodes, some of them are inter-connected by edges, and it all makes sense. It is in real-world networks that things become complicated: what&rsquo;s a node? What&rsquo;s an edge? When it comes to the brain, the answers to these questions depend on what scale one is targeting, and what tools has available. For whole-brain, structural connectivity, the usual approach is to use tractography, and then count how many streamlines there are between each pair of regions to weight the associated graph."/>
+
+    <meta property="og:title" content="Every bundle counts - A recipe for bundle-wise, myelin-weighted connectomes" />
+<meta property="og:description" content="Esoteric connectomes Graphs are straightforward objects: you have a bunch of nodes, some of them are inter-connected by edges, and it all makes sense. It is in real-world networks that things become complicated: what&rsquo;s a node? What&rsquo;s an edge? When it comes to the brain, the answers to these questions depend on what scale one is targeting, and what tools has available. For whole-brain, structural connectivity, the usual approach is to use tractography, and then count how many streamlines there are between each pair of regions to weight the associated graph." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neurosnippets.com/posts/bundle-connectome/" />
+<meta property="article:published_time" content="2021-03-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-03-10T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://neurosnippets.com/"><img class="app-header-avatar" src="/img/me.png" alt="Matteo Mancini" /></a>
+      <h1 class="title">NeuroSnippets</h1>
+      <h3 class="author">Matteo Mancini</h3>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             &bull; 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <nav class="app-header-menu">
+        
+        
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/about_me/">About me</a>
+        
+          
+             &bull; 
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/research/">Research</a>
+        
+      </nav>
+      <p>A blog about brains, open-source code and (literally) everything in between.</p>
+      <p><div class="question">Who am I</div> A biomedical engineer, Sir Henry Wellcome Postdoctoral Fellow, on a quest for better brain maps.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/matteomancini" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/ingmatman" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <a name="post"><h1 class ="post-title">Every bundle counts - A recipe for bundle-wise, myelin-weighted connectomes</h1></a>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 10, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          6 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+              <a class="tag" href="https://neurosnippets.com/tags/python/">python</a>
+              <a class="tag" href="https://neurosnippets.com/tags/bash/">bash</a>
+              <a class="tag" href="https://neurosnippets.com/tags/mrtrix3/">MRtrix3</a>
+              <a class="tag" href="https://neurosnippets.com/tags/dmri/">dMRI</a>
+        </div>
+      </div>
+    </header>
+    
+      <figure>
+        <img class="post-pic" src="https://neurosnippets.com/img/connectome.gif">
+        
+          <figcaption>Here are some heatmaps to show the results, although heatmaps sometimes may be <a href="https://xkcd.com/1138/">a bit misleading</a>.</figcaption>
+        
+        </figure>
+    
+    <div class="post-content">
+      <h2 id="esoteric-connectomes">Esoteric connectomes</h2>
+<p>Graphs are straightforward objects: you have a bunch of nodes, some of them are inter-connected by edges, and it all makes sense. It is in real-world networks that things become complicated: what&rsquo;s a node? What&rsquo;s an edge? When it comes to the brain, the answers to these questions depend on what scale one is targeting, and what tools has available. For whole-brain, structural connectivity, the usual approach is to use tractography, and then count how many streamlines there are between each pair of regions to weight the associated graph. Number of streamlines (NOS) is not great, but it has been showed to <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/hbm.22828" title="Comparing tract-tracing and tractography">somehow correlate</a> with the microscopical fiber count. But what if we want to use something else as a weight? There&rsquo;s a <a href="https://www.jneurosci.org/content/36/14/4056" title="So many measures!">whole list of complementary MRI measures</a> that could be use to provide complementary information. Most tools to make this <em>fusion</em> are available in <a href="https://mrtrix.readthedocs.io/en/latest/" title="MRtrix3 Documentation">MRtrix3</a>, except maybe the last tricky one: averaging. It would be tempting to average each measure for each streamline, and then average again over the streamlines inter-connecting two areas - but this approach can introduce a NOS bias in the measure of interest. What if we want to compute, for each connection, the average across the <em>whole bundle</em>?</p>
+<p>In this post, I will show the whole workflow of how to make one of these <em>esoteric</em> connectomes, from the pre-processing to the final bundle-wise averaging, using as a weight a myeline measure. All the related script are on the <a href="https://github.com/matteomancini/neurosnippets/tree/master/workflows/bundle-connectome">NeuroSnippets repository</a>.</p>
+<h2 id="we-want-a-matrix---squish-those-data">We want a matrix - squish those data!</h2>
+<p>We need a lot of stuff (parcellated anatomical data, pre-processed diffusion data, a myelin map) before getting to the actual issue we want to tackle, so we better get going. Publicly available myelin maps are not easy to find, but we are in luck as recently Kristin Koller and colleagues shared the <a href="https://osf.io/z3mkn/" title="MICRA dataset">MICRA</a> dataset, containing a <a href="https://www.sciencedirect.com/science/article/pii/S1053811920308910" title="Koller et al. 2021">rich collection of data</a> that is perfect for this scenario. Let&rsquo;s start with downloading the data from <a href="https://osf.io" title="OSF">OSF</a> and the fundamental pre-processing: my usual choice for processing and parcellating T1-weighted data is <a href="https://surfer.nmr.mgh.harvard.edu" title="FreeSurfer">FreeSurfer</a>, but in this case to save time we will rely on <a href="https://github.com/Deep-MI/FastSurfer" title="FastSurfer repository">FastSurfer</a>. For the diffusion MRI pre-processing, we will use the <a href="http://neurosnippets.com/posts/papermill-preproc/#post" title="Diffusion MRI preprocessing through papermill">papermill workflow</a> I talked about last month. Once we have done all of that, we can actually start thinking about the core processing. Here is how these first steps look like:</p>
+<pre><code>
+# Downloading anatomical, diffusion and MWF data for subject 1 and session 1
+wget https://files.osf.io/v1/resources/z3mkn/providers/owncloud/sub-01/ses-01/anat/sub-01_ses-01_T1w.nii.gz
+wget https://files.osf.io/v1/resources/z3mkn/providers/owncloud/sub-01/ses-01/dwi/sub-01_ses-01_part-mag_dwi.nii.gz
+wget https://files.osf.io/v1/resources/z3mkn/providers/owncloud/sub-01/ses-01/dwi/sub-01_ses-01_part-mag_dwi.bvec
+wget https://files.osf.io/v1/resources/z3mkn/providers/owncloud/sub-01/ses-01/dwi/sub-01_ses-01_part-mag_dwi.bval
+wget https://files.osf.io/v1/resources/z3mkn/providers/owncloud/sub-01/ses-01/fmap/sub-01_ses-01_part-mag_epi.nii.gz
+wget https://files.osf.io/v1/resources/z3mkn/providers/owncloud/sub-01/ses-01/fmap/sub-01_ses-01_part-mag_epi.bvec
+wget https://files.osf.io/v1/resources/z3mkn/providers/owncloud/sub-01/ses-01/fmap/sub-01_ses-01_part-mag_epi.bval
+wget https://files.osf.io/v1/resources/z3mkn/providers/owncloud/derivatives/sub-01/ses-01/McDespot/MWF1.nii.gz
+
+# Clone FastSurfer repo, install requirments and run FastSurfer
+git clone git clone https://github.com/Deep-MI/FastSurfer.git
+pip3 install -r FastSurfer/requirements.txt
+mkdir fastsurfer_subjects
+./FastSurfer/run_fastsurfer.sh --t1 sub-01_ses-01_T1w.nii.gz --sid sub1 --sd fastsurfer_subjects --parallel --threads 4
+
+# Run diffusion pre-processing (using a tailor notebook and papermill)
+mkdir dwpreproc
+cd dwpreproc
+papermill ../../papermill-preproc/dwi_preproc.ipynb -p ap ../sub-01_ses-01_part-mag_dwi.nii.gz \
+    -p pa sub-01_ses-01_part-mag_epi.nii.gz -p main_dir &quot;AP&quot; results.ipynb
+cd ..
+
+# Run actual processing
+mkdir processing
+cd processing
+../build_bundle_connectome.sh ../dwpreproc/eddy_corrected.nii.gz ../dwpreproc/eddy_corrected.eddy_rotated_bvecs \
+    ../sub-01_ses-01_part-mag_dwi.bval ../fastsurfer_subjects sub1 ../MWF1.nii.gz ../
+    
+</code></pre><p>Let&rsquo;s now dive inside the main script: from the pre-processed data, we want first to make everything aligned. In this case, we are in luck since the myelin water fraction (MWF) map provided in the MICRA dataset can be linearly registered to the anatomical volume. For aligning the anatomical volume with the diffusion MRI data, we will use the <a href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FLIRT_BBR" title="FSL documentation">boundary-based registration</a> technique. Once we have these transformations, it is a matter of applying them:</p>
+<pre><code>
+# converting data to MIF
+mrconvert -fslgrad $bvec $bval $dwi dwi.mif
+dwibiascorrect ants dwi.mif dwi_unbiased.mif
+dwi2mask dwi_unbiased.mif mask.nii.gz
+
+# computing a masked meanb0
+dwiextract -bzero dwi.mif b0_vols.nii
+mrmath b0_vols.nii mean meanb0.nii -axis 3
+mrcalc meanb0.nii mask.nii.gz -mult b0_masked.nii
+
+# registration
+mri_convert --in_type mgz --out_type nii --out_orientation RAS ${sub_folder}/$fs/mri/brain.mgz brain.nii
+mrconvert ${sub_folder}/$fs/mri/aparc+aseg.orig.mgz aparc+aseg.nii
+fast -v brain.nii
+flirt -in $mymap -ref brain.nii -dof 6 -out mymap_anat.nii.gz
+flirt -in b0_masked.nii -ref brain.nii -dof 6 -omat dw2anat_init.mat
+flirt -in b0_masked.nii -ref brain.nii -cost bbr -wmseg brain_pve_2.nii.gz -init dw2anat_init.mat -omat dw2anat.mat \
+    -dof 6 -schedule ${FSL_DIR}/etc/flirtsch/bbr.sch
+transformconvert dw2anat.mat meanb0.nii brain.nii flirt_import dw2anat_mrtrix.txt
+mrtransform -linear dw2anat_mrtrix.txt -inverse mymap_anat.nii.gz mymap_dw.mif
+mrtransform -linear dw2anat_mrtrix.txt -inverse brain.nii brain_dw.mif
+mrtransform -linear dw2anat_mrtrix.txt -inverse -interp nearest -template brain.nii aparc+aseg.nii aparc+aseg_dw.mif
+labelconvert aparc+aseg_dw.mif ${FREESURFER_HOME}/FreeSurferColorLUT.txt ${script_path}/fs_85nodes.txt nodes.nii
+
+</code></pre><p>The next step is reconstructing a fiber-orientation distribution and performing whole-brain tractography: we will do that using <a href="https://mrtrix.readthedocs.io/en/latest/constrained_spherical_deconvolution/multi_shell_multi_tissue_csd.html">multi-tissue, multi-shell constrainted spherical deconvolution</a> and <a href="https://mrtrix.readthedocs.io/en/latest/quantitative_structural_connectivity/act.html">anatomy-constrained tractography</a>, both implemented in <a href="https://mrtrix.readthedocs.io/en/latest/" title="MRtrix3 Documentation">MRtrix3</a>. Once we have the tractogram, we also need to map the MWF data to the streamlines:</p>
+<pre><code>
+# generating 5tt file, FOD and tracking
+5ttgen fsl -nocrop -premasked brain_dw.mif 5tt.mif
+dwi2response msmt_5tt dwi.mif 5tt.mif wm.txt gm.txt csf.txt
+dwi2fod msmt_csd dwi.mif wm.txt wm.mif gm.txt gm.mif csf.txt csf.mif -mask mask.nii.gz
+tckgen wm.mif track1M.tck -act 5tt.mif -backtrack -crop_at_gmwmi -seed_dynamic wm.mif -minlength 10 -maxlength 250 -angle 30 -select 1M
+tcksample track1M.tck mymap_dw.mif mymap.csv
+    
+</code></pre><p>We are ready to generate a connectome based on the number of streamlines using <code>tck2connectome</code>. But what about the bundle-wise connectivity we want to achieve? To take care of that, we can use <code>python</code>. We will need two things:</p>
+<ul>
+<li>the mapping between MWF and the streamlines: we generated that in the previous step;</li>
+<li>the list of ROIs from our parcellation scheme that the streamlines are connecting - we can obtain it defining the <code>-out_assignment</code> parameter when calling <code>tck2connectome</code>.</li>
+</ul>
+<p>We are ready for the last steps:</p>
+<pre><code>
+# generating connectome
+tck2connectome -symmetric -zero_diagonal -out_assignments fibers_assignment.txt track1M.tck nodes.nii connectome.csv
+# removing comments from csv and txt files
+sed -i '/^#/d' mymap.csv
+sed -i '/^#/d' fibers_assignment.txt
+# generating map-bundle-weighted connectome
+${script_path}/bundle_connectome.py fibers_assignment.txt mymap.csv --mean connectome_mymap.csv
+
+</code></pre><h2 id="bundle-them-up">Bundle them up!</h2>
+<p>To finally build our bundle-wise, myelin-weighted connectome, we need less than 50 lines of <code>python</code> code. Let&rsquo;s start from importing the packages and defining a couple of functions:</p>
+<pre><code>import numpy as np
+import sys
+
+def usage():
+    # Shows the general usage
+    print('Usage: '+sys.argv[0]+' in_assignment_file in_weight_file operation out_matrix')
+
+
+def process(data, action):
+    # Process the data using the related action from numpy
+    if action == &quot;--mean&quot;:
+        result = np.mean(data)
+    elif action == &quot;--median&quot;:
+        result = np.median(data)
+    return result
+
+
+if len(sys.argv) &lt; 4:
+    usage()
+    sys.exit(1)
+assert sys.argv[3] in ['--mean', '--median'], \
+    f&quot;Unknown operation: {sys.argv[3]}. Must be one of: --mean, --median&quot;
+    
+</code></pre><p>The <code>process()</code> function gives us the chance to choose if we want to compute the mean or the median for each bundle, and it is easy to extend it in case one needs a different central measure.</p>
+<p>For the core steps of this script, we will heavily take advantage of <code>python</code>:</p>
+<ol>
+<li>we will loop in parallel through the assignment and mapping files;</li>
+<li>for each line, we will build a <em>sparse</em> matrix, where for each row and column we assemble a list of all the related values from the mapping;</li>
+<li>as we want a symmetric matrix, we will need to fill just half of the row-column combinations;</li>
+<li>once we have the complete <em>sparse</em> matrix, we will build the related <em>full</em> matrix using our central measure of choice.</li>
+</ol>
+<p>Let&rsquo;s translate these steps in code:</p>
+<pre><code>
+sparsemat = {}
+with open(sys.argv[1], 'r') as f, open(sys.argv[2], 'r') as w:
+    # loop in parallel over the two files
+    for pair, values in zip(f,w):
+        row, col = [int(p) for p in pair.split(' ')]
+        if row &gt; col:
+            # symmetric connectivity
+            row, col = col, row
+        key = (row, col)
+        dist = [float(v) for v in values.split(' ') if not np.isnan(float(v))]
+        sparsemat.setdefault(key,[]).extend(dist)
+
+n = np.max([*sparsemat.keys()])
+fullmat = np.zeros((n, n))
+for ix in range(n):
+    for jx in range(ix+1, n):
+        fullmat[ix, jx] = process(sparsemat.get((ix+1, jx+1), 0), sys.argv[3])
+        fullmat[jx, ix] = fullmat[ix, jx]
+
+np.savetxt(sys.argv[4], fullmat)
+
+</code></pre><p>And we are done!</p>
+<h2 id="useful-references">Useful references</h2>
+<ul>
+<li><a href="https://www.mitpressjournals.org/doi/abs/10.1162/netn_a_00179" title="Network Neuroscience">An example of <em>esoteric</em> weight: R1</a></li>
+<li><a href="https://osf.io/z3mkn/" title="MICRA dataset">MICRA dataset</a></li>
+<li><a href="https://www.sciencedirect.com/science/article/pii/S1053811920308910" title="NeuroImage">&ldquo;MICRA: Microstructural image compilation with repeated acquisitions&rdquo;</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
