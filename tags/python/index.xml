@@ -6,7 +6,16 @@
     <description>Recent content in python on NeuroSnippets</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Wed, 10 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DieSitCom - A minimal Streamlit-based viewer for DICOM data</title>
+      <link>https://neurosnippets.com/posts/diesitcom/</link>
+      <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/posts/diesitcom/</guid>
+      <description>DICOM another file There are two kind of (neuroimaging) people in this world: those who like the NIFTI format, and those who lie. Jokes aside, it is quite common for many neuroimagers to deal with the endpoint of the acquisition pipeline, to the point that not everyone has dealt directly with what actually comes out of an MRI scanner, data in DICOM format. But at some point, that time comes: for one reason or another, dcm2niix does not give us everything we need, and we need to go back to the source.</description>
+    </item>
+    
     <item>
       <title>Every bundle counts - A recipe for bundle-wise, myelin-weighted connectomes</title>
       <link>https://neurosnippets.com/posts/bundle-connectome/</link>

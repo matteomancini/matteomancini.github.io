@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en-uk">
+  <head>
+    <title>DieSitCom - A minimal Streamlit-based viewer for DICOM data // NeuroSnippets</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.76.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Matteo Mancini" />
+    <meta name="description" content="" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <link rel="stylesheet" href="https://neurosnippets.com/css/main.min.9594d69abdd169534d699b3e364130681441a142ca55039d76d678b2eb7141b8.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-187589071-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="DieSitCom - A minimal Streamlit-based viewer for DICOM data"/>
+<meta name="twitter:description" content="DICOM another file There are two kind of (neuroimaging) people in this world: those who like the NIFTI format, and those who lie. Jokes aside, it is quite common for many neuroimagers to deal with the endpoint of the acquisition pipeline, to the point that not everyone has dealt directly with what actually comes out of an MRI scanner, data in DICOM format. But at some point, that time comes: for one reason or another, dcm2niix does not give us everything we need, and we need to go back to the source."/>
+
+    <meta property="og:title" content="DieSitCom - A minimal Streamlit-based viewer for DICOM data" />
+<meta property="og:description" content="DICOM another file There are two kind of (neuroimaging) people in this world: those who like the NIFTI format, and those who lie. Jokes aside, it is quite common for many neuroimagers to deal with the endpoint of the acquisition pipeline, to the point that not everyone has dealt directly with what actually comes out of an MRI scanner, data in DICOM format. But at some point, that time comes: for one reason or another, dcm2niix does not give us everything we need, and we need to go back to the source." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neurosnippets.com/posts/diesitcom/" />
+<meta property="article:published_time" content="2021-03-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-03-17T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://neurosnippets.com/"><img class="app-header-avatar" src="/img/me.png" alt="Matteo Mancini" /></a>
+      <h1 class="title">NeuroSnippets</h1>
+      <h3 class="author">Matteo Mancini</h3>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             &bull; 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <nav class="app-header-menu">
+        
+        
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/about_me/">About me</a>
+        
+          
+             &bull; 
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/research/">Research</a>
+        
+      </nav>
+      <p>A blog about brains, open-source code and (literally) everything in between.</p>
+      <p><div class="question">Who am I</div> A biomedical engineer, Sir Henry Wellcome Postdoctoral Fellow, on a quest for better brain maps.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/matteomancini" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/ingmatman" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <a name="post"><h1 class ="post-title">DieSitCom - A minimal Streamlit-based viewer for DICOM data</h1></a>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 17, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+              <a class="tag" href="https://neurosnippets.com/tags/brainviz/">brainviz</a>
+              <a class="tag" href="https://neurosnippets.com/tags/python/">python</a>
+              <a class="tag" href="https://neurosnippets.com/tags/streamlit/">streamlit</a>
+              <a class="tag" href="https://neurosnippets.com/tags/itk/">ITK</a>
+              <a class="tag" href="https://neurosnippets.com/tags/mri/">MRI</a>
+        </div>
+      </div>
+    </header>
+    
+      <figure>
+        <img class="post-pic" src="https://neurosnippets.com/img/dcm.gif">
+        
+          <figcaption>If you think that both NIFTI and DICOM formats make things too complicated check out the <a href="https://xkcd.com/2116/">normal file format</a>.</figcaption>
+        
+        </figure>
+    
+    <div class="post-content">
+      <h2 id="dicom-another-file">DICOM another file</h2>
+<p>There are two kind of (neuroimaging) people in this world: those who like the NIFTI format, and those who lie. Jokes aside, it is quite common for many <em>neuroimagers</em> to deal with the <em>endpoint</em> of the acquisition pipeline, to the point that not everyone has dealt directly with what actually comes out of an MRI scanner, data in <a href="https://towardsdatascience.com/understanding-dicom-bce665e62b72" title="Understanding DICOM">DICOM format</a>. But at some point, that time comes: for one reason or another, <code>dcm2niix</code> does not give us everything we need, and we need to go back to the <em>source</em>. But do we really want to look for a software to handle DICOM data and install it? Probably not. But there is good news: with <a href="https://itk.org" title="Insight ToolKit">ITK</a> (and specifically <a href="https://simpleitk.readthedocs.io/en/master/link_DicomSeriesReader_docs.html" title="SimpleITK Documentation">SimpleITK</a>), reading data and metadata from a DICOM folder is a matter of just a few lines of code. While we are at it, we may as well make a dashboard out of it!</p>
+<p>In this post, I will show how to put together that dashboard using <a href="https://www.streamlit.io" title="Streamlit">Streamlit</a>, so guess what, we are doing that in <em>50 lines of code</em>! As in most cases one may be interested in some <em>obscure</em> parameter hidden in the DICOM header, we will make sure that both the images and the metadata are accessible. This example and the related requirements are on the <a href="https://github.com/matteomancini/neurosnippets/tree/master/brainviz/diesitcom">NeuroSnippets repository</a>.</p>
+<h2 id="dont-count-your-dicoms-before-they-are-read">Don’t count your DICOMs before they are read</h2>
+<p>We can recycle some of the code written for the <a href="http://neurosnippets.com/posts/diesitcom/#post" title="The Skull-Strip Club">skull-stripping dashboard</a>. As in that example, we need first to import the relevant packages and define two functions, one for selecting the input and the other for plotting:</p>
+<pre><code>import os
+import matplotlib.pyplot as plt
+import pandas as pd
+import streamlit as st
+import SimpleITK as sitk
+
+
+def dir_selector(folder_path='.'):
+    dirnames = [d for d in os.listdir(folder_path) if os.path.isdir(os.path.join(folder_path, d))]
+    selected_folder = st.sidebar.selectbox('Select a folder', dirnames)
+    if selected_folder is None:
+        return None
+    return os.path.join(folder_path, selected_folder)
+
+
+def plot_slice(vol, slice_ix):
+    fig, ax = plt.subplots()
+    plt.axis('off')
+    selected_slice = vol[slice_ix, :, :]
+    ax.imshow(selected_slice, origin='lower', cmap='gray')
+    return fig
+</code></pre><p>The functions are slightly different from the skull-stripping dashboard: instead of looking for NIFTI files, we are looking for folders (and we will need to handle the case where a given folder is not DICOM-related) once again embedding a dropdown menu within the function; in terms of plotting, this time the function is shorter as we do not need to handle overlays.</p>
+<p>The next block of code, that is also the last one (*<em>already!?</em>*), deals with defining the objects we need and inter-connect them:</p>
+<pre><code>st.sidebar.title('DieSitCom')
+dirname = dir_selector()
+
+if dirname is not None:
+    try:
+        reader = sitk.ImageSeriesReader()
+        dicom_names = reader.GetGDCMSeriesFileNames(dirname)
+        reader.SetFileNames(dicom_names)
+        reader.LoadPrivateTagsOn()
+        reader.MetaDataDictionaryArrayUpdateOn()
+        data = reader.Execute()
+        img = sitk.GetArrayViewFromImage(data)
+    
+        n_slices = img.shape[0]
+        slice_ix = st.sidebar.slider('Slice', 0, n_slices, int(n_slices/2))
+        output = st.sidebar.radio('Output', ['Image', 'Metadata'], index=0)
+        if output == 'Image':
+            fig = plot_slice(img, slice_ix)
+            plot = st.pyplot(fig)
+        else:
+            metadata = dict()
+            for k in reader.GetMetaDataKeys(slice_ix):
+                metadata[k] = reader.GetMetaData(slice_ix, k)
+            df = pd.DataFrame.from_dict(metadata, orient='index', columns=['Value'])
+            st.dataframe(df)
+    except RuntimeError:
+        st.text('This does not look like a DICOM folder!')
+</code></pre><p>Once again, <code>streamlit</code> offers a great example of how quick is it to put together a simple but functional dashboard. In less than 30 lines of code, we are doing the following:</p>
+<ul>
+<li>creating all the objects we need - a <code>title</code>, a <code>slider</code> and a <code>radio</code> button (all of these in the <code>sidebar</code>), a <code>pyplot</code> container for the figure, and finally a <code>dataframe</code> container for the metadata;</li>
+<li>when any folder name is selected through the function <code>dir_selector()</code>, the DICOM data and metadata are read using <code>SimpleITK</code>;</li>
+<li>we use the <code>slider</code> to select the slice of interest, and the <code>radio</code> button to choose if we are interested in the actual images or in the metadata;</li>
+<li>we embed most of what I just listed in a <code>try</code>/<code>except</code> block to avoid error messages whenever the dropdown menu ends up on a non-DICOM folder.</li>
+</ul>
+<p>Now we have to find some DICOM to test it!</p>
+<h2 id="dicom-island">DICOM Island</h2>
+<p>Publicly available DICOM data are not easy to find, but we are in luck: on the <a href="https://github.com/plotly/dash-vtk" title="GitHub repository"><code>dash-vtk</code> repository</a> (that also provides an amazing example to use Dash for <a href="https://dash-gallery.plotly.host/dash-vtk-explorer/" title="dash-vtk explorer">3D rendering</a> of DICOM data leveraging <a href="https://vtk.org" title="Visualization Toolkit">VTK</a>) there are some sample DICOM datasets, including a brain. To retrieve the data, we can clone the repository or, to download directly that specific folder, we can use <code>svn</code>:</p>
+<pre><code>svn checkout https://github.com/plotly/dash-vtk/trunk/demos/data/mri_brain
+</code></pre><p>It&rsquo;s time for <code>streamlit</code>:</p>
+<pre><code>streamlit run diesitcom.py
+</code></pre><h2 id="useful-references">Useful references</h2>
+<ul>
+<li><a href="https://towardsdatascience.com/understanding-dicom-bce665e62b72" title="Towards Data Science">Diving into DICOMs</a></li>
+<li><a href="https://www.streamlit.io" title="Streamlit">Streamlit</a></li>
+<li><a href="https://simpleitk.readthedocs.io/en/master/link_DicomSeriesReader_docs.html" title="SimpleITK Documentation">Reading DICOM with SimpleITK</a></li>
+<li><a href="https://github.com/plotly/dash-vtk" title="GitHub repository">dash-vtk</a></li>
+<li><a href="https://dash-gallery.plotly.host/dash-vtk-explorer/" title="dash-vtk explorer">3D rendering of DICOM data with dash-vtk</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

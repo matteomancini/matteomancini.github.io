@@ -6,7 +6,52 @@
     <description>Recent content in Tags on NeuroSnippets</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Wed, 10 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>brainviz</title>
+      <link>https://neurosnippets.com/tags/brainviz/</link>
+      <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/tags/brainviz/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ITK</title>
+      <link>https://neurosnippets.com/tags/itk/</link>
+      <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/tags/itk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MRI</title>
+      <link>https://neurosnippets.com/tags/mri/</link>
+      <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/tags/mri/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://neurosnippets.com/tags/python/</link>
+      <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>streamlit</title>
+      <link>https://neurosnippets.com/tags/streamlit/</link>
+      <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/tags/streamlit/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>bash</title>
       <link>https://neurosnippets.com/tags/bash/</link>
@@ -35,24 +80,6 @@
     </item>
     
     <item>
-      <title>python</title>
-      <link>https://neurosnippets.com/tags/python/</link>
-      <pubDate>Wed, 10 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://neurosnippets.com/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>brainviz</title>
-      <link>https://neurosnippets.com/tags/brainviz/</link>
-      <pubDate>Wed, 03 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://neurosnippets.com/tags/brainviz/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>plotly</title>
       <link>https://neurosnippets.com/tags/plotly/</link>
       <pubDate>Wed, 03 Mar 2021 00:00:00 +0000</pubDate>
@@ -67,24 +94,6 @@
       <pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate>
       
       <guid>https://neurosnippets.com/tags/fsl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>MRI</title>
-      <link>https://neurosnippets.com/tags/mri/</link>
-      <pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://neurosnippets.com/tags/mri/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>streamlit</title>
-      <link>https://neurosnippets.com/tags/streamlit/</link>
-      <pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://neurosnippets.com/tags/streamlit/</guid>
       <description></description>
     </item>
     
