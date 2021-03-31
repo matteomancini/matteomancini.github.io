@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en-uk">
+  <head>
+    <title>Game of Dashboards: one brain, four frameworks [Part 1: Streamlit, Dash] // NeuroSnippets</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.76.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Matteo Mancini" />
+    <meta name="description" content="" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <link rel="stylesheet" href="https://neurosnippets.com/css/main.min.9594d69abdd169534d699b3e364130681441a142ca55039d76d678b2eb7141b8.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-187589071-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Game of Dashboards: one brain, four frameworks [Part 1: Streamlit, Dash]"/>
+<meta name="twitter:description" content="A matter of choice? I&rsquo;m quite a fan of dashboards (you couldn&rsquo;t tell right?). I think that they offer an interesting medium with a double potential: useful for actual work, especially quality control and exploratory analyses, but also for presentation purposes - a dashboard can become the actual final product of research. It is not surprising then that there are so many choices in terms of dashboard frameworks. Are they all inter-changeable though?"/>
+
+    <meta property="og:title" content="Game of Dashboards: one brain, four frameworks [Part 1: Streamlit, Dash]" />
+<meta property="og:description" content="A matter of choice? I&rsquo;m quite a fan of dashboards (you couldn&rsquo;t tell right?). I think that they offer an interesting medium with a double potential: useful for actual work, especially quality control and exploratory analyses, but also for presentation purposes - a dashboard can become the actual final product of research. It is not surprising then that there are so many choices in terms of dashboard frameworks. Are they all inter-changeable though?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neurosnippets.com/posts/game-of-dashboards/" />
+<meta property="article:published_time" content="2021-03-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-03-31T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://neurosnippets.com/"><img class="app-header-avatar" src="/img/me.png" alt="Matteo Mancini" /></a>
+      <h1 class="title">NeuroSnippets</h1>
+      <h3 class="author">Matteo Mancini</h3>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             &bull; 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <nav class="app-header-menu">
+        
+        
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/about_me/">About me</a>
+        
+          
+             &bull; 
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/research/">Research</a>
+        
+      </nav>
+      <p>A blog about brains, open-source code and (literally) everything in between.</p>
+      <p><div class="question">Who am I</div> A biomedical engineer, Sir Henry Wellcome Postdoctoral Fellow, on a quest for better brain maps.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/matteomancini" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/ingmatman" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <a name="post"><h1 class ="post-title">Game of Dashboards: one brain, four frameworks [Part 1: Streamlit, Dash]</h1></a>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 31, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          8 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+              <a class="tag" href="https://neurosnippets.com/tags/dataviz/">dataviz</a>
+              <a class="tag" href="https://neurosnippets.com/tags/python/">python</a>
+              <a class="tag" href="https://neurosnippets.com/tags/streamlit/">streamlit</a>
+              <a class="tag" href="https://neurosnippets.com/tags/dash/">dash</a>
+              <a class="tag" href="https://neurosnippets.com/tags/fmri/">fMRI</a>
+        </div>
+      </div>
+    </header>
+    
+      <figure>
+        <img class="post-pic" src="https://neurosnippets.com/img/game_of_dashboards.svg">
+        
+          <figcaption>Sure, with so many frameworks available coding is much easier, but be aware of the <a href="https://xkcd.com/1646/">Twitter Bot Effect</a>.</figcaption>
+        
+        </figure>
+    
+    <div class="post-content">
+      <h2 id="a-matter-of-choice">A matter of choice?</h2>
+<p>I&rsquo;m quite a fan of dashboards (you couldn&rsquo;t tell right?). I think that they offer an interesting <em>medium</em> with a double potential: useful for actual work, especially quality control and exploratory analyses, but also for presentation purposes - a dashboard can become the actual <em>final product</em> of research. It is not surprising then that there are so many choices in terms of dashboard frameworks. Are they all inter-changeable though? Which one should you pick for <em>that next thing</em>? There&rsquo;s only one way to answer this question: make the <em>same</em> dashboard using different frameworks.</p>
+<p>In this post (the first of two parts), I will focus on a <em>brainy</em> use case and go through the implementation using different python frameworks. I will highlight their differences and point out advantages and disadvantages. Here I will start showcasing <a href="https://streamlit.io">Streamlit</a> and <a href="https://dash.plotly.com" title="Dash">Dash</a>. All the related code is available on the <a href="https://github.com/matteomancini/neurosnippets/tree/master/dataviz/game-of-dashboards">NeuroSnippets repository</a>.</p>
+<h2 id="ground-rules">Ground rules</h2>
+<p>For each framework, I will aim to make more or less the same dashboard: an <em>image-based explorer</em> for fMRI data. The dashboard will read the data (using <a href="https://nipy.org/nibabel/" title="NiBabel"><code>nibabel</code></a>), compute their average over time (using <a href="https://numpy.org" title="NumPy"><code>numpy</code></a>) and display a slice of this average volume. Navigating the volume and the slice through <em>dedicated components</em>, one should be able to retrieve the BOLD signal timecourse for a given voxel in a separate plot.</p>
+<p>I will be using the data from the <a href="https://openneuro.org/datasets/ds000243/versions/00001" title="OpenNeuro">Washington University 120 dataset</a> shared by Steve Petersen and Brad Schlaggar. As usual, we can easily download the data through <a href="https://www.datalad.org" title="DataLad">DataLad</a>:</p>
+<pre><code>datalad install https://github.com/OpenNeuroDatasets/ds000243.git
+cd ds000243/
+datalad get sub-001/func/sub-001_task-rest_run-1_bold.nii.gz
+cp sub-001/func/sub-001_task-rest_run-1_bold.nii.gz ../bold.nii.gz
+</code></pre><h2 id="be-quick-or-be-dead-streamlit">Be quick or be dead: Streamlit</h2>
+<p>The simplest way to make a dashboard is arguably <a href="https://streamlit.io">Streamlit</a>. I&rsquo;ve already used it in previous posts (<a href="https://neurosnippets.com/posts/diesitcom/#post">here</a> and <a href="https://neurosnippets.com/posts/quick-stripper/#post">here</a>), and I mentioned several times its greatest advantages: ready-to-use components that can be instantiated in very few lines of code, and the interactions coming out almost of nowhere. It literally feels like <em>magic</em>. Is it always the ideal choice though? We are about to find out.</p>
+<p>Let&rsquo;s start as usual importing the packages and defining some functions we will need:</p>
+<pre><code>import nibabel as nib
+import numpy as np
+import streamlit as st
+import matplotlib.pyplot as plt
+
+
+@st.cache
+def load(filename):
+    img = nib.load(filename)
+    img_data = img.get_fdata()
+    mean_vol = np.mean(img_data, axis=3)
+    return img_data, mean_vol
+
+
+def plot_zslice(vol, coord_xy, z):
+    fig, ax = plt.subplots()
+    ax.imshow(vol[:, :, z].T, origin='lower', cmap='gray')
+    ax.scatter([coord_xy[0]], [coord_xy[1]], facecolors='none', edgecolors='r')
+    return fig
+
+
+def plot_tc(vol_4d, coord):
+    fig, ax = plt.subplots()
+    ax.plot(np.arange(vol_4d.shape[3]), vol_4d[coord[0], coord[1], coord[2], :])
+    return fig
+</code></pre><p>Apart from the plotting functions that resemble previous examples, you may notice that there&rsquo;s a novel addition: the <code>load()</code> function has a decorator! The role of <code>streamlit.cache</code> is to keep the results from a given function in the <a href="https://docs.streamlit.io/en/stable/caching.html"><em>cache</em></a> whenever the input has not changed. Otherwise, the whole thing will be always re-executed every time the user interacts with a component. So far that&rsquo;s the only <code>streamlit</code>-related line!</p>
+<p>Now that we have both the necessary packages and functions, we can get to the core of the dashboard:</p>
+<pre><code>filename = 'bold.nii.gz'
+vol_4d, mean_vol = load(filename)
+vol_size = mean_vol.shape
+
+x = st.sidebar.slider('x', 0, vol_size[0], int(vol_size[0]/2))
+y = st.sidebar.slider('y', 0, vol_size[1], int(vol_size[1]/2))
+z = st.sidebar.slider('z', 0, vol_size[2], int(vol_size[2]/2))
+fig1 = plot_zslice(mean_vol, [x, y], z)
+fig2 = plot_tc(vol_4d, [x,y,z])
+
+col1, col2 = st.beta_columns(2)
+col1.pyplot(fig1)
+col2.pyplot(fig2)
+</code></pre><p>Once the data are loaded, we create all the components we need to visualize images and timecourses as well as the components to interact with them. Why do we need all those <code>slider</code> components? In Streamlit, we need to rely on specific components to <em>update</em> any visualization. For this application, it would be easier to just <em>click</em> on the image to update the other plot. Unfortunately, this is not doable in Streamlit <em>yet</em>, at least out of the box. However, similar features are in the long list of potential enhancements for Streamlit (see this <a href="https://github.com/streamlit/streamlit/issues/298">issue</a> and this <a href="https://github.com/streamlit/streamlit/issues/455">other one</a>), so it is worth watching out for new releases. Also, the fact that it does not come <em>out of the box</em> does not mean that it cannot be done: following up a <a href="https://discuss.streamlit.io/t/could-we-have-plotly-figurewidget-support/4271">question on the Streamlit forum</a> and leveraging <a href="https://medium.com/streamlit/introducing-streamlit-components-d73f2092ae30">Streamlit custom components</a>, Fanilo Adrianasolo has showed <a href="https://dev.to/andfanilo/streamlit-components-scatterplot-with-selection-using-plotly-js-3d7n">how this can be achieved</a>, with a little more effort, embedding <a href="https://plotly.com/javascript/">plotly.js</a>.</p>
+<p>The last three lines of the last snippet also offer an interesting feature to discuss: during the last fall, Streamlit introduced <a href="https://blog.streamlit.io/introducing-new-layout-options-for-streamlit/">dedicated layout components</a> for tailoring how the dashboard looks like. In this case, we are relying on <code>streamlit.beta_columns</code> (that, as you may imagine, divides the dashboard in columns) in a very minimal way, but more complex layouts can be arranged in just a bunch of lines.</p>
+<p>That&rsquo;s it, less than 40 lines of code, and the dashboard is ready to be run:</p>
+<pre><code>streamlit run bold_explorer_sl.py
+</code></pre><p>It is noticeable that it does not feel as <em>snappy</em> as a previous example (<a href="https://neurosnippets.com/posts/quick-stripper/#post">BET Explorer</a>), but it should be evident from the previous paragraph, we are at the edge of (current) Streamlit use cases. Once again, the amazing Streamlit team is <a href="https://github.com/streamlit/streamlit/issues/494">already on it</a>.</p>
+<h2 id="to-tame-a-land-dash">To tame a land: Dash</h2>
+<p>For anyone who is used to <a href="https://plotly.com/graphing-libraries/" title="Plotly">Plotly</a>, <a href="https://dash.plotly.com" title="Dash">Dash</a> feels like its natural extension. Although we don&rsquo;t <em>magically</em> get the interaction we may want without actually implementing it, in most cases a couple of short functions is all we need and even more. As a matter of fact, it is writing tailored functions that we can put together amazing results.</p>
+<p>So we start importing the packages and loading the data:</p>
+<pre><code>import dash
+import dash_core_components as dcc
+import dash_html_components as html
+import nibabel as nib
+import numpy as np
+import plotly.express as px
+from dash.dependencies import Input, Output, State
+
+
+img = nib.load('bold.nii.gz')
+vol_4d = img.get_fdata()
+mean_vol = np.mean(vol_4d, axis=3)
+midslice = int(mean_vol.shape[2]/2)
+fig = px.imshow(mean_vol[:,:,midslice].T, binary_string=True, origin='lower')
+fig_tc = px.line()
+</code></pre><p>Here we have a first difference with Streamlit: these lines of code (loading the data, retrieving an average volume from the whole dataset) will be executed just once, unless we refresh the page or restart the dashboard. We don&rsquo;t need to embed them in a specific function to make sure that we use the <em>cached</em> values. On one hand this may sound intuitive (&quot;<em>I don&rsquo;t have to think about cache!</em>&quot;), but on the other hand it is something to keep in mind: changing one of these variables inside a <em>callback</em> function is not the same as changing its value here! We will see about that in a bit.</p>
+<p>We are ready to <em>sketch</em> how the dashboard will look like:</p>
+<pre><code>app = dash.Dash(__name__)
+
+app.layout = html.Div([html.Div([
+        html.Div(
+            [dcc.Graph(id='graph-mri', figure=fig),
+             dcc.Slider(
+                id='slice-slider',
+                min=0,
+                max=mean_vol.shape[2] - 1,
+                value=midslice,
+                step=1)],
+            style={'width': '60%', 'display': 'inline-block', 'padding': '0 0'},
+        ),
+        html.Div(
+            [dcc.Graph(id='graph-tc', figure=fig_tc)],
+            style={'width': '40%', 'display': 'inline-block', 'padding': '0 0'},
+        ), html.Div(id='current-slice', style={'display': 'none'})
+    ])
+])
+
+
+</code></pre><p>Layout definition is clearly another big difference with Streamlit: the structure needs to be defined using HTML components and styled with CSS rules. Is this an advantage or a disadvantage? It depends very much on what we want to achieve: for a quick dashboard, we may not want to deal with this. If the goal is ultimately a web app it may not be an issue - it may even make things easier if it needs to be <em>integrated</em> into something larger.</p>
+<p>Although we defined all the elements and how they should be visually arranged, things do not <em>interact</em> yet. We need to define some <code>callback</code> functions to achieve that:</p>
+<pre><code>@app.callback(
+    Output('graph-tc', 'figure'),
+    Input('graph-mri', 'clickData'),
+    State('current-slice', 'children'),
+    prevent_initial_call=True
+)
+def update_tc(clickData, vol_slice):
+    tc = vol_4d[clickData['points'][0]['x'], clickData['points'][0]['y'], int(vol_slice), :]
+    fig = px.line(x=np.arange(len(tc)), y=tc)
+    return fig
+
+
+@app.callback(
+    [Output('graph-mri', 'figure'),
+    Output('current-slice', 'children')],
+    Input('slice-slider', 'value'))
+def update_slice(vol_slice):
+    fig = px.imshow(mean_vol[:,:,vol_slice].T, binary_string=True, origin='lower')
+    return [fig, vol_slice]
+
+
+if __name__ == &quot;__main__&quot;:
+    app.run_server(debug=True)
+</code></pre><p>The function <code>update_tc()</code> takes care of generating the plot of the timecourse corresponding to the point we clicked in the image, while <code>update_slice()</code> updates the current volume slice on the basis of the slider. The decorators here specify inputs and outputs, and their order is <em>mirrored</em> in the parameters and the returned values of the respective functions.</p>
+<p>We need to pay attention to the fact that the current slice is needed by <code>updated_tc()</code> <em>as well</em>, to plot the right timecourse. To make sure that it is the case, one way (as done in the <a href="https://neurosnippets.com/posts/mri-histogram/#post">histogrammer</a>) is to make a unique <code>callback</code> function, combining inputs and outputs, and find out which input has caused the function to be triggered using the <a href="https://dash.plotly.com/advanced-callbacks">context object</a>. The other way, as implemented here, is through data sharing between different <code>callback</code> functions. The current slice index is stored in a hidden <code>div</code> block (defined in the previous snippet and made invisible through the CSS property <code>display</code>). We can then update it through <code>update_slice()</code> and retrieve it through <code>update_tc()</code> when needed. As we don&rsquo;t want slice selection to trigger <code>update_tc()</code> (we didn&rsquo;t click!), in the <code>callback</code> decorator we handle the current slice as a <a href="https://dash.plotly.com/basic-callbacks"><code>State</code> rather than an <code>Input</code></a>.</p>
+<p>This brief explanation leads to two considerations. First, there are more concepts to grasp compared to streamlit (where we almost don&rsquo;t need to look at the documentation!!). Second, this <em>conceptual overhead</em> allows us to tailor how the components interact with each other in great detail.</p>
+<p>We are ready to go in around 60 lines of code:</p>
+<pre><code>python bold_explorer_dash.py
+</code></pre><p>Quite a <em>fluid</em> result, if you ask me!</p>
+<h2 id="useful-references">Useful references</h2>
+<ul>
+<li><a href="https://openneuro.org/datasets/ds000243/versions/00001" title="OpenNeuro">Washington University 120 dataset</a></li>
+<li><a href="https://www.streamlit.io" title="Streamlit">Streamlit</a></li>
+<li><a href="https://streamlit.io/gallery" title="Streamlit Gallery">Streamlit gallery</a></li>
+<li><a href="https://blog.streamlit.io/introducing-new-layout-options-for-streamlit/" title="Streamlit blog">Streamlit layout components</a></li>
+<li><a href="https://medium.com/streamlit/introducing-streamlit-components-d73f2092ae30" title="Medium">Streamlit custom components</a></li>
+<li><a href="https://docs.streamlit.io/en/stable/caching.html" title="Streamlit documentation">Improve performances with Streamlit</a></li>
+<li><a href="https://dash.plotly.com" title="Dash">Dash</a></li>
+<li><a href="https://dash-gallery.plotly.host/Portal/" title="Dash Gallery">Dash gallery</a></li>
+<li><a href="https://dash.plotly.com/basic-callbacks" title="Dash documentation">Basic callbacks with Dash</a></li>
+<li><a href="https://dash.plotly.com/advanced-callbacks" title="Dash documentation">Advanced callbacks with Dash</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
