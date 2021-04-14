@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>holoviz on NeuroSnippets</title>
+    <link>https://neurosnippets.com/tags/holoviz/</link>
+    <description>Recent content in holoviz on NeuroSnippets</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <lastBuildDate>Mon, 12 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/holoviz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Game of Dashboards: one brain, four frameworks [Part 2: Bokeh, HoloViz]</title>
+      <link>https://neurosnippets.com/posts/game-of-dashboards-2/</link>
+      <pubDate>Mon, 12 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/posts/game-of-dashboards-2/</guid>
+      <description>This is the second part of the dashboard framework comparison. The first part is here.
+In the previous episode&amp;hellip; Let&amp;rsquo;s pick up where we left off, shall we? Last time I sketched the idea of making the same dashboard with four different frameworks. We are halfway through: so far we&amp;rsquo;ve seen Streamlit and Dash. But there is more out there!
+In this second part I will be showcasing Bokeh and HoloViz.</description>
+    </item>
+    
+  </channel>
+</rss>

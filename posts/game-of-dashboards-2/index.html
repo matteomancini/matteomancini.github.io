@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en-uk">
+  <head>
+    <title>Game of Dashboards: one brain, four frameworks [Part 2: Bokeh, HoloViz] // NeuroSnippets</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.76.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Matteo Mancini" />
+    <meta name="description" content="" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <link rel="stylesheet" href="https://neurosnippets.com/css/main.min.9594d69abdd169534d699b3e364130681441a142ca55039d76d678b2eb7141b8.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-187589071-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Game of Dashboards: one brain, four frameworks [Part 2: Bokeh, HoloViz]"/>
+<meta name="twitter:description" content="This is the second part of the dashboard framework comparison. The first part is here.
+In the previous episode&hellip; Let&rsquo;s pick up where we left off, shall we? Last time I sketched the idea of making the same dashboard with four different frameworks. We are halfway through: so far we&rsquo;ve seen Streamlit and Dash. But there is more out there!
+In this second part I will be showcasing Bokeh and HoloViz."/>
+
+    <meta property="og:title" content="Game of Dashboards: one brain, four frameworks [Part 2: Bokeh, HoloViz]" />
+<meta property="og:description" content="This is the second part of the dashboard framework comparison. The first part is here.
+In the previous episode&hellip; Let&rsquo;s pick up where we left off, shall we? Last time I sketched the idea of making the same dashboard with four different frameworks. We are halfway through: so far we&rsquo;ve seen Streamlit and Dash. But there is more out there!
+In this second part I will be showcasing Bokeh and HoloViz." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neurosnippets.com/posts/game-of-dashboards-2/" />
+<meta property="article:published_time" content="2021-04-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-12T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://neurosnippets.com/"><img class="app-header-avatar" src="/img/me.png" alt="Matteo Mancini" /></a>
+      <h1 class="title">NeuroSnippets</h1>
+      <h3 class="author">Matteo Mancini</h3>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             &bull; 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <nav class="app-header-menu">
+        
+        
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/about_me/">About me</a>
+        
+          
+             &bull; 
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/research/">Research</a>
+        
+      </nav>
+      <p>A blog about brains, open-source code and (literally) everything in between.</p>
+      <p><div class="question">Who am I</div> A biomedical engineer, Sir Henry Wellcome Postdoctoral Fellow, on a quest for better brain maps.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/matteomancini" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/ingmatman" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <a name="post"><h1 class ="post-title">Game of Dashboards: one brain, four frameworks [Part 2: Bokeh, HoloViz]</h1></a>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Apr 12, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          8 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+              <a class="tag" href="https://neurosnippets.com/tags/dataviz/">dataviz</a>
+              <a class="tag" href="https://neurosnippets.com/tags/python/">python</a>
+              <a class="tag" href="https://neurosnippets.com/tags/bokeh/">bokeh</a>
+              <a class="tag" href="https://neurosnippets.com/tags/holoviz/">holoviz</a>
+              <a class="tag" href="https://neurosnippets.com/tags/fmri/">fMRI</a>
+        </div>
+      </div>
+    </header>
+    
+      <figure>
+        <img class="post-pic" src="https://neurosnippets.com/img/game_of_dashboards_2.svg">
+        
+          <figcaption>Choosing a framework for a dashboard is just another way of posing once again <a href="https://xkcd.com/974/">the general problem</a>.</figcaption>
+        
+        </figure>
+    
+    <div class="post-content">
+      <p><em>This is the second part of the dashboard framework comparison. The first part is <a href="https://neurosnippets.com/posts/game-of-dashboards/#post">here</a>.</em></p>
+<h2 id="in-the-previous-episode">In the previous episode&hellip;</h2>
+<p>Let&rsquo;s pick up where we left off, shall we? Last time I sketched the idea of making the same dashboard with four different frameworks. We are halfway through: so far we&rsquo;ve seen <a href="https://streamlit.io">Streamlit</a> and <a href="https://dash.plotly.com" title="Dash">Dash</a>. But there is more out there!</p>
+<p>In this second part I will be showcasing <a href="https://bokeh.org" title="Bokeh">Bokeh</a> and <a href="https://holoviz.org" title="HoloViz">HoloViz</a>. All the related code is available on the <a href="https://github.com/matteomancini/neurosnippets/tree/master/dataviz/game-of-dashboards">NeuroSnippets repository</a>.</p>
+<h2 id="running-free-bokeh">Running Free: Bokeh</h2>
+<p>In the python world/space/<em>dimension</em>, there is at least another big (and amazing) library for interactive visualization apart from Plotly, and that library is <a href="https://docs.bokeh.org/en/latest/" title="Bokeh Documentation">Bokeh</a>. Despite their differences, both Plotly and Bokeh are a Python (and, in <a href="https://plotly.com/graphing-libraries/" title="Plotly in other languages">both cases</a>, <a href="https://docs.bokeh.org/en/latest/docs/dev_guide/bindings.html" title="Bokeh in other languages">beyond!</a>) wrapper to Javascript-based visualization. As you may guess, the similarities do not stop here (otherwise Bokeh would not be in this post!): using <a href="https://docs.bokeh.org/en/latest/docs/user_guide/server.html" title="Bokeh server">Bokeh server</a> one can make amazing <a href="https://docs.bokeh.org/en/latest/docs/gallery.html" title="Bokeh Gallery">dashboards</a>.</p>
+<p>You probably know how it works now - we start importing the packages and defining the usual couple of functions:</p>
+<pre><code>from bokeh.layouts import layout
+from bokeh.models import Slider
+from bokeh.plotting import figure, curdoc
+from bokeh.events import Tap
+import nibabel as nib
+import numpy as np
+
+
+def update_slice(attr, old, new):
+    new_data = dict(image=[mean_vol[:,:,slider.value].T])
+    implot_source.data = new_data
+
+
+def update_tc(event):
+    new_data = dict(x=np.arange(0, vol_4d.shape[3]),
+                    y=vol_4d[
+                        np.floor(event.x).astype(int),
+                        np.floor(event.y).astype(int),
+                        slider.value, :]
+                   )
+    tcplot_source.data = new_data
+
+</code></pre><p>We can already notice quite a difference if we compare the code to the examples from the previous post: interestingly enough, we are not <em>returning</em> figures as we were doing in Streamlit and Dash - in fact, we are not returning anything! Each function creates a dictionary on the basis of some property and/or event that has occured (in a bit we will dig more into that), and use that dictionary to update the data of a <em>source</em> object. It&rsquo;s hard to fully grasp what this means without working out the whole thing so let&rsquo;s proceed.</p>
+<p>With our modules and functions, we can now <em>do stuff</em>:</p>
+<pre><code>img = nib.load('bold.nii.gz')
+vol_4d = img.get_fdata()
+mean_vol = np.mean(vol_4d, axis=3)
+midslice = int(mean_vol.shape[2]/2)
+
+plot1 = figure(toolbar_location=None, tools='hover')
+plot1.axis.visible = False
+plot1.xgrid.visible = False
+plot2 = figure(background_fill_color=&quot;#fafafa&quot;, tools='hover')
+slider = Slider(start=0, end=mean_vol.shape[2]-1, step=1, value=midslice, title='Slice')
+</code></pre><p>The first block is quite similar to the other examples: loading the data using <code>nibabel</code>, computing the average volume, and so on. In the second block we are defining the components of our dashboard: two <code>figure</code> objects, both with the hovering tool enabled, and a <code>Slider</code>, that goes from the first to the last slice of our volume. It is worth noticing that the <code>figure</code> objects do not contain anything in terms of pictures or plots, we will need to fill them in some way.</p>
+<p>As the <em>foundation</em> of our dashboard is ready, we are ready to make things <em>interesting</em>:</p>
+<pre><code>implot = plot1.image(image=[mean_vol[:,:,midslice].T],
+                     x=0, y=0, dw=mean_vol.shape[0], dh=mean_vol.shape[1])
+implot_source = implot.data_source
+
+tcplot = plot2.line(x=[], y=[], line_width=3)
+tcplot_source = tcplot.data_source
+
+slider.on_change('value', update_slice)
+plot1.on_event(Tap, update_tc)
+
+curdoc().add_root(layout([[slider],[plot1, plot2]]))
+</code></pre><p>In the first two blocks we are adding content to our <code>figure</code> objects: we are respectively adding an image plot and a line one through the related methods of the <code>figure</code> object, and keeping a reference to those plots through the objects <code>implot</code> and <code>tcplot</code>. We are also keeping a reference of their <code>data_source</code> properties, which (as the name implies) describe the data that has been fed to the related plot. The third block is the key one for making things <em>interactive</em>: first, we decide that whenever the slider value changes, the function <code>update_slice</code> needs to be called. If we go back to that function, we can see that it updates the slice selected from the volume using the value from the slider - and the update is based on changing <a href="https://docs.bokeh.org/en/latest/docs/user_guide/data.html" title="Providing data to Bokeh">the content of the source data</a>. In the same way, we decide that whenever there is a <code>Tap</code> event (a mouse click) on the image plot, the function <code>update_tc</code> needs to be called to update line plot through its source. The very last line literally assembles the final document: using the <code>layout</code> object, each component can be positioned in a grid fashion through a <em>list of lists</em>, where the inner lists are rows and each of their elements is a column.</p>
+<p>We are at 45 lines of code, that is less than Dash but more than Streamlit. We can try the dashboard out typing:</p>
+<pre><code>bokeh serve bold_explorer_bokeh.py
+</code></pre><p>The result is as snappy and fluid as with Dash, and we are similarly able to further refine the behaviour of the dashboard.</p>
+<h2 id="phantom-of-the-opera-holoviz">Phantom of the Opera: Holoviz</h2>
+<p>The last but not least framework in our list is <a href="https://holoviz.org" title="HoloViz">HoloViz</a>. HoloViz leverages other existing tools, like Plotly, Bokeh and many others, to provide a <a href="https://holoviz.org/background.html" title="HoloViz background">layered high-level framework</a> able to provide quick solutions (and we will see what <em>quick</em> means here) but also chances to get detail-oriented. As I&rsquo;ll explain further at the very end of this post, HoloViz has a crucial parallelism to Plotly and Dash: it provides an actual <em>ecosystem</em> of tools. In this specific application, we will focus on <a href="https://panel.holoviz.org" title="Panel">Panel</a> - the ideal solution for dashboards.</p>
+<p>This time we will <em>take our time</em> and define at the beginning just one of the functions we need (we&rsquo;ll see why in a bit):</p>
+<pre><code>import numpy as np
+import panel as pn
+import plotly.graph_objs as go
+import nibabel as nib
+import plotly.express as px
+
+
+def get_slice(zslice=0):
+    return px.imshow(mean_vol[:,:,zslice].T, binary_string=True, width=500, origin='lower')
+
+</code></pre><p>There isn&rsquo;t much to comment here, except that we are saving lines of code accessing directly the average volume (that we&rsquo;ll need to define before calling this function, otherwise we&rsquo;ll be in trouble).</p>
+<p>Let&rsquo;s look at the usual initialization step:</p>
+<pre><code>img = nib.load('bold.nii.gz')
+vol_4d = img.get_fdata()
+mean_vol = np.mean(vol_4d, axis=3)
+pn.extension(&quot;plotly&quot;)
+sliceplot = pn.interact(get_slice, zslice=np.arange(0, mean_vol.shape[2]))
+</code></pre><p>Two things are new here: first, to use <code>plotly</code> in the dashboard, we are loading the related <code>panel</code> extension; second, and this is really mind-blowing, we are making our data volume navigable through a slider <em>in one line</em>. I&rsquo;m serious - the last line here allows the dashboard to interact with the function <code>get_slice</code> through the parameter <code>zslice</code>, appropriately set to the list of slice indices. At it is set to a list, <code>panel.interact</code> automatically prepare a slider to go through the list. An important thing to notice here: <code>sliceplot</code> contains both the references to the slider and to the actual image plot, so if we want to access just one of them (as we will in a bit) we need to use <code>sliceplot</code> as it was an array (well, actually it is one!).</p>
+<p>We are halfway through our dashboard, we still need to retrieve the desired time course through clicking the image:</p>
+<pre><code>@pn.depends(sliceplot[1][0].param.click_data)
+def get_tc(click_data):
+    if click_data is None:
+        return px.line()
+    else:
+        return px.line(x=np.arange(0, vol_4d.shape[3]),
+                       y=vol_4d[click_data['points'][0]['x'], click_data['points'][0]['y'],
+                                sliceplot[0][0].value, :])
+
+
+app = pn.Row(sliceplot, get_tc)
+app.servable()
+</code></pre><p>Here is the other function we were missing! The function uses the <code>click_data</code> parameter from the previous plot: if <code>click_data</code> is not <code>None</code> (so someone has clicked!), a <code>line</code> plot is generated using the coordinates of the click and the current value of the slider. To connect this function to the related widget, we are using a decorator, and it is because of that decorator that we cannot declare this function at the beginning (otherwise <code>sliceplot</code> would not exist!). The last two lines takes care of positioning the components (one after the other in a <code>Row</code>) and making this whole thing a deployable app.</p>
+<p>And I guess we&rsquo;re done. <em>What do you mean we&rsquo;re done? That&rsquo;s 30 lines of code!!</em> That&rsquo;s right. Honestly, the fact that you can make a whole dashboard in just 30 lines of code still blows me away. If you don&rsquo;t believe it, it&rsquo;s just a matter of typing:</p>
+<pre><code>panel serve bold_explorer_hv.py
+</code></pre><p>Anyone will have a hard time telling this result from the previous one!</p>
+<h2 id="final-showdown">Final showdown</h2>
+<p>At this point, a question is legit: <em>what should I use</em>? And unfortunately, the answer is one of the most hated: <em>it depends</em>.</p>
+<p>First, an easy advice: if you have a script that needs to be turned into a dashboard, Streamlit is the easy answer. As most components can be implemented in <em>one line</em>, there is almost no need to <em>read</em> any documentation. Even if you need start an actual dashboard, Streamlit can be a good solution if the time constraints are strict - especially if the main purpose of the dashboard is to play with some parameters and run over and over a target command/tool/monster (as in the <a href="https://neurosnippets.com/posts/quick-stripper/#post">BET Explorer</a>). The application showcased here is at the edge of what can be done with Streamlit for now, but so far the Streamlit team has added feature after feature, and click-based interactions <a href="https://github.com/streamlit/streamlit/issues/494">may be coming soon</a>. A point to take into account when comparing with the other frameworks is layout customization: the recently added <a href="https://blog.streamlit.io/introducing-new-layout-options-for-streamlit/" title="Streamlit layout">layout components</a> offer a good level of freedom to structure a dashboard, with the limit being multi-page applications (that is <a href="https://discuss.streamlit.io/t/multi-page-apps/266" title="Streamlit multi-page request">still doable</a> <a href="https://discuss.streamlit.io/t/multi-page-app-with-session-state/3074" title="Streamlit multi-page trick">playing around</a>).</p>
+<p>What if Streamlit is not enough for a target application? Well, it starts to become a <em>flavour-dependent</em> choice. The underlying interactive visualization library could give some direction: Dash may sound natural for Plotly users, and the same stands for Bokeh - but then in HoloViz <em>you can easily use both</em>. Working with the layout of the dashboard leads to substantial differences: in Dash it is necessary to rely on the HTML components and on CSS style sheets. While this offers an amazing flexibility, it requires both skills and effort - while with Bokeh and HoloViz there are solutions to avoid the HTML+CSS layer.</p>
+<p>The <em>domain</em> of the target application also may help in the choice of a framework: an interesting added value of Dash is its <em>ecosystem</em> - in addition to the core components, there are several of them for specific fields. A incomplete list includes: handling <a href="https://github.com/plotly/dash-slicer" title="Dash Slicer">3D volumes</a> for medical imaging; representing <a href="https://dash.plotly.com/cytoscape" title="Cytoscape">network models</a>; <a href="https://dash.plotly.com/canvas" title="Drawing with Dash">drawing</a> and <a href="https://dash.plotly.com/annotations" title="Image annotations with Dash">image annotations</a> for computer vision. The HoloViz ecosystem also offers <a href="https://holoviz.org/background.html" title="HoloViz Ecosysten">potential domain-specific tools</a>, especially for <a href="http://geoviews.org" title="GeoViews">geospatial data</a>.</p>
+<p>My final recommendation is one: try them out!</p>
+<h2 id="useful-references">Useful references</h2>
+<ul>
+<li><a href="https://openneuro.org/datasets/ds000243/versions/00001" title="OpenNeuro">Washington University 120 dataset</a></li>
+<li><a href="https://bokeh.org" title="Bokeh">Bokeh</a></li>
+<li><a href="https://docs.bokeh.org/en/latest/docs/gallery.html" title="Bokeh Gallery">Bokeh gallery</a></li>
+<li><a href="https://docs.bokeh.org/en/latest/docs/user_guide/data.html" title="Bokeh documentation">Providing data to Bokeh</a></li>
+<li><a href="https://docs.bokeh.org/en/latest/docs/reference/events.html" title="Bokeh reference">Going deeper in Bokeh events</a></li>
+<li><a href="https://holoviz.org" title="HoloViz">HoloViz</a></li>
+<li><a href="https://panel.holoviz.org/gallery/index.html" title="HoloViz Gallery">HoloViz gallery</a></li>
+<li><a href="https://holoviz.org/background.html" title="HoloViz background">HoloViz goal and ecosystem</a></li>
+<li><a href="https://panel.holoviz.org" title="Panel">Panel</a></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

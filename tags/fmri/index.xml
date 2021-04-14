@@ -6,14 +6,26 @@
     <description>Recent content in fMRI on NeuroSnippets</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Wed, 31 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/fmri/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/fmri/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Game of Dashboards: one brain, four frameworks [Part 2: Bokeh, HoloViz]</title>
+      <link>https://neurosnippets.com/posts/game-of-dashboards-2/</link>
+      <pubDate>Mon, 12 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/posts/game-of-dashboards-2/</guid>
+      <description>This is the second part of the dashboard framework comparison. The first part is here.
+In the previous episode&amp;hellip; Let&amp;rsquo;s pick up where we left off, shall we? Last time I sketched the idea of making the same dashboard with four different frameworks. We are halfway through: so far we&amp;rsquo;ve seen Streamlit and Dash. But there is more out there!
+In this second part I will be showcasing Bokeh and HoloViz.</description>
+    </item>
+    
     <item>
       <title>Game of Dashboards: one brain, four frameworks [Part 1: Streamlit, Dash]</title>
       <link>https://neurosnippets.com/posts/game-of-dashboards/</link>
       <pubDate>Wed, 31 Mar 2021 00:00:00 +0000</pubDate>
       
       <guid>https://neurosnippets.com/posts/game-of-dashboards/</guid>
-      <description>A matter of choice? I&amp;rsquo;m quite a fan of dashboards (you couldn&amp;rsquo;t tell right?). I think that they offer an interesting medium with a double potential: useful for actual work, especially quality control and exploratory analyses, but also for presentation purposes - a dashboard can become the actual final product of research. It is not surprising then that there are so many choices in terms of dashboard frameworks. Are they all inter-changeable though?</description>
+      <description>This is the first part of the dashboard framework comparison. The second part is here.
+A matter of choice? I&amp;rsquo;m quite a fan of dashboards (you couldn&amp;rsquo;t tell right?). I think that they offer an interesting medium with a double potential: useful for actual work, especially quality control and exploratory analyses, but also for presentation purposes - a dashboard can become the actual final product of research. It is not surprising then that there are so many choices in terms of dashboard frameworks.</description>
     </item>
     
     <item>
