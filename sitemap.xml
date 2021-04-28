@@ -3,48 +3,73 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://neurosnippets.com/tags/bokeh/</loc>
-    <lastmod>2021-04-12T00:00:00+00:00</lastmod>
+    <loc>https://neurosnippets.com/tags/dmri/</loc>
+    <lastmod>2021-04-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://neurosnippets.com/tags/dataviz/</loc>
-    <lastmod>2021-04-12T00:00:00+00:00</lastmod>
+    <loc>https://neurosnippets.com/posts/voice-monitor/</loc>
+    <lastmod>2021-04-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://neurosnippets.com/tags/fmri/</loc>
-    <lastmod>2021-04-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neurosnippets.com/posts/game-of-dashboards-2/</loc>
-    <lastmod>2021-04-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neurosnippets.com/tags/holoviz/</loc>
-    <lastmod>2021-04-12T00:00:00+00:00</lastmod>
+    <loc>https://neurosnippets.com/tags/mrtrix3/</loc>
+    <lastmod>2021-04-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://neurosnippets.com/</loc>
-    <lastmod>2021-04-12T00:00:00+00:00</lastmod>
+    <lastmod>2021-04-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://neurosnippets.com/posts/</loc>
-    <lastmod>2021-04-12T00:00:00+00:00</lastmod>
+    <lastmod>2021-04-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://neurosnippets.com/tags/python/</loc>
-    <lastmod>2021-04-12T00:00:00+00:00</lastmod>
+    <loc>https://neurosnippets.com/tags/speechrecognition/</loc>
+    <lastmod>2021-04-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://neurosnippets.com/tags/</loc>
-    <lastmod>2021-04-12T00:00:00+00:00</lastmod>
+    <lastmod>2021-04-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/tags/tips-and-tricks/</loc>
+    <lastmod>2021-04-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/tags/bokeh/</loc>
+    <lastmod>2021-04-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/tags/dataviz/</loc>
+    <lastmod>2021-04-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/tags/fmri/</loc>
+    <lastmod>2021-04-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/posts/game-of-dashboards-2/</loc>
+    <lastmod>2021-04-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/tags/holoviz/</loc>
+    <lastmod>2021-04-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neurosnippets.com/tags/python/</loc>
+    <lastmod>2021-04-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -88,17 +113,7 @@
   </url>
   
   <url>
-    <loc>https://neurosnippets.com/tags/dmri/</loc>
-    <lastmod>2021-03-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://neurosnippets.com/posts/bundle-connectome/</loc>
-    <lastmod>2021-03-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neurosnippets.com/tags/mrtrix3/</loc>
     <lastmod>2021-03-10T00:00:00+00:00</lastmod>
   </url>
   
@@ -130,11 +145,6 @@
   <url>
     <loc>https://neurosnippets.com/posts/mri-histogram/</loc>
     <lastmod>2021-02-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neurosnippets.com/tags/tips-and-tricks/</loc>
-    <lastmod>2021-02-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>

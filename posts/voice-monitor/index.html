@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en-uk">
+  <head>
+    <title>Hey Jarvis, what&#39;s up? A voice assistant to monitor a target application // NeuroSnippets</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.76.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Matteo Mancini" />
+    <meta name="description" content="" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+    <link rel="stylesheet" href="https://neurosnippets.com/css/main.min.9594d69abdd169534d699b3e364130681441a142ca55039d76d678b2eb7141b8.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-187589071-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Hey Jarvis, what&#39;s up? A voice assistant to monitor a target application"/>
+<meta name="twitter:description" content="Can&rsquo;t you just tell me? Let&rsquo;s be frank: we are always running a lot of stuff, we constantly juggle multiple flows of data processing, on top of hundreds of tabs in the browser, email clients, drafts, honestly my head starts spinning just if I keep following this train of thought. I always feel that this kind of ordinary and apparent multi-tasking approach always takes its toll on focus. When it comes to deep focus, I personally believe that there is no solution: one has to avoid any context switching."/>
+
+    <meta property="og:title" content="Hey Jarvis, what&#39;s up? A voice assistant to monitor a target application" />
+<meta property="og:description" content="Can&rsquo;t you just tell me? Let&rsquo;s be frank: we are always running a lot of stuff, we constantly juggle multiple flows of data processing, on top of hundreds of tabs in the browser, email clients, drafts, honestly my head starts spinning just if I keep following this train of thought. I always feel that this kind of ordinary and apparent multi-tasking approach always takes its toll on focus. When it comes to deep focus, I personally believe that there is no solution: one has to avoid any context switching." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://neurosnippets.com/posts/voice-monitor/" />
+<meta property="article:published_time" content="2021-04-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-28T00:00:00+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://neurosnippets.com/"><img class="app-header-avatar" src="/img/me.png" alt="Matteo Mancini" /></a>
+      <h1 class="title">NeuroSnippets</h1>
+      <h3 class="author">Matteo Mancini</h3>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             &bull; 
+          
+          <a class="app-header-menu-item" href="/tags/">Tags</a>
+      </nav>
+      <nav class="app-header-menu">
+        
+        
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/about_me/">About me</a>
+        
+          
+             &bull; 
+          
+          
+          <a class="app-header-menu-item" href="https://neurosnippets.com/research/">Research</a>
+        
+      </nav>
+      <p>A blog about brains, open-source code and (literally) everything in between.</p>
+      <p><div class="question">Who am I</div> A biomedical engineer, Sir Henry Wellcome Postdoctoral Fellow, on a quest for better brain maps.</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/matteomancini" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://twitter.com/ingmatman" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <a name="post"><h1 class ="post-title">Hey Jarvis, what&#39;s up? A voice assistant to monitor a target application</h1></a>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Apr 28, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          5 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+              <a class="tag" href="https://neurosnippets.com/tags/speechrecognition/">SpeechRecognition</a>
+              <a class="tag" href="https://neurosnippets.com/tags/dmri/">dMRI</a>
+              <a class="tag" href="https://neurosnippets.com/tags/mrtrix3/">MRtrix3</a>
+              <a class="tag" href="https://neurosnippets.com/tags/tips-and-tricks/">tips-and-tricks</a>
+        </div>
+      </div>
+    </header>
+    
+      <figure>
+        <img class="post-pic" src="https://neurosnippets.com/img/jarvis.gif">
+        
+          <figcaption>And as a next step to this tutorial, you should make sound your assistant, you know, <a href="https://xkcd.com/1931/"><em>more real</em></a>.</figcaption>
+        
+        </figure>
+    
+    <div class="post-content">
+      <h2 id="cant-you-just-_tell_-me">Can&rsquo;t you just <em>tell</em> me?</h2>
+<p>Let&rsquo;s be frank: we are always running a lot of stuff, we constantly juggle multiple flows of data processing, on top of hundreds of tabs in the browser, email clients, drafts, honestly my head starts spinning just if I keep following this train of thought. I always feel that this kind of <em>ordinary</em> and <em>apparent</em> multi-tasking approach always takes its toll on <em>focus</em>. When it comes to <em>deep focus</em>, I personally believe that there is no solution: one has to avoid any context switching. But for <em>shallow focus</em>, wouldn&rsquo;t it be nice to check out how the data processing is doing without looking for the right terminal, finding it, and forgetting what you were doing before? Why you can&rsquo;t just <em>ask</em>?</p>
+<p>Is it a crazy idea though? It has been already five years from those times when making a personal assistant could sound like a <a href="https://www.theguardian.com/technology/2016/jan/03/mark-zuckerberg-2016-artificial-intelligence-butler" title="What happened to the butler?">crazy challenge</a>. These days, with so many names that TV and videos are forbidden to say aloud (&quot;<em>Alexa?</em>&quot;, &ldquo;<em>Cortana?</em>&rdquo;, &ldquo;<em>Ok Google?</em>&quot;), making a simple voice assistant is straightforward as ever (while we still may be quite far from <a href="https://www.forbes.com/sites/robtoews/2020/07/19/gpt-3-is-amazingand-overhyped/" title="How many eyes does my foot have?"><em>intelligent conversations</em></a>). And as a matter of fact, in this post I show how to put together a voice assistant to get updates from some script running! No more context switching between browser, terminal, Illustrator, VNC, &hellip; (<em>the list is long</em>) All the related scripts are on the <a href="https://github.com/matteomancini/neurosnippets/tree/master/tips-and-tricks/voice-monitor">NeuroSnippets repository</a>.</p>
+<h2 id="hear-no-evil-speak-no-evil">Hear no evil, speak no evil</h2>
+<p>As we are looking for a quick way to implement a voice assistant, we will rely on two packages that makes the experience painless (or almost painless, if sometimes your voice is not recognize correctly). To <em>vocalize</em> the messages, we will use <a href="https://pyttsx3.readthedocs.io/en/latest/" title="pyttsx3 documentation"><code>pyttsx3</code></a>. To recognize the text from the sound, we will use <a href="https://github.com/Uberi/speech_recognition" title="SpeechRecognition repository"><code>SpeechRecognition</code></a>. There are several examples online showing how to use this duo to make a virtual assistant that does all sorts of things (see the references at the end!).</p>
+<p>For a change (not really), let&rsquo;s start by importing the necessary packages and defining the two main functions:</p>
+<pre><code>import speech_recognition as sr
+import pyttsx3
+
+
+def speak(text):
+    engine = pyttsx3.init()
+    engine.say(text)
+    engine.runAndWait()
+    
+    
+def get_audio():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        audio = r.listen(source)
+        said = &quot;&quot;
+
+        try:
+            said = r.recognize_google(audio)
+            print(said)
+        except Exception as e:
+            print(&quot;Exception: &quot; + str(e))
+
+    return said.lower()
+</code></pre><p>The <code>speak()</code> function cannot be more straightforward than this: you give it some text, it initializes the <code>pyttsx3</code> engine, <code>say()</code> queues up the text, and then <code>runAndWait()</code> makes you hear it! The other function, <code>get_audio()</code> has a bit more going on: using the <code>Microphone()</code> as a source, a <code>Recognizer()</code> object temporarily records some sounds and then tries to make sense of it through <code>recognize_google()</code>; if it manages to, we write that on screen (it is useful to understand <em>mispronunciation</em> cases) and we return it as a lower-case string.</p>
+<p>Next, we need to define some keywords and catchphrases:</p>
+<pre><code>wake_word = &quot;hey jarvis&quot;
+queries = [&quot;what is the status&quot;, &quot;what is going on&quot;,
+           &quot;how is going with&quot;, &quot;any update with&quot;]
+quit = &quot;thank you&quot;
+</code></pre><p>I couldn&rsquo;t resist the <a href="https://marvel-movies.fandom.com/wiki/Just_A_Rather_Very_Intelligent_System" title="Just A Rather Very Intelligent System"><em>Iron Man</em> fashion</a>. We can of course have multiple lists of queries, depending on the tasks we want to implement, but here we are keeping things simple.
+We can now pull everything together:</p>
+<pre><code>while True:
+    print(&quot;Listening...&quot;)
+    text = get_audio()
+
+    if text.count(wake_word) &gt; 0:
+        for phrase in queries:
+            if phrase in text:
+                filename = text.split(' ')[-1]+'.txt'
+                try:
+                    file_handle = open(filename,'r')
+                    last_update = file_handle.readlines()[-1]
+                    file_handle.close()
+                    speak(&quot;The current status is: &quot; + last_update)
+                except IOError:
+                    speak(&quot;I cannot find &quot; + filename)
+        else:
+            if quit in text:
+                speak(&quot;Goodbye&quot;)
+                break
+</code></pre><p>The use of an infinite loop will avoid the need to restart the script each time. For each iteration, we collect some sounds, and we check for the <code>wake_word</code>: if we called <em>Jarvis</em>, the next step will be seeing if it was followed by any of the expected queries. This is an important point for how this will work: implemented like this, <em>Jarvis</em> expects that we ask what we want in one sentence (e.g. &ldquo;<em>Hey Jarvis, what is going on with &hellip;?</em>&quot;). If a sentence is matched with an expected one, the last word of the sentence is retrieved and use to open a text file. Again, another important point for how this works: this simplification means that everytime we ask for updates, the name of the output file for our target application needs to go <em>last</em>. Once that file is read, the last line is retrieved and we finally get the update we want. If by any chance we referred to a file that does not exist, <em>Jarvis</em> will let us know. After the <code>for</code>loop is done, if by any chance we said &ldquo;<em>Thank you</em>&rdquo;, an <em>else</em> statement will <em>release Jarvis from his duty</em>. We&rsquo;re done!</p>
+<h2 id="jarvis-can-you-hear-me">Jarvis, can you hear me?</h2>
+<p>To test <em>Jarvis</em>, I wrote down a short script that downloads some diffusion data using <a href="https://dipy.org"><code>dipy</code></a> and then process everything using <a href="https://www.mrtrix.org"><code>MRtrix3</code></a>. Importantly, I made sure that at each step the script prints on the screen what is going on:</p>
+<pre><code>#!/bin/bash
+
+echo &quot;Downloading data&quot;
+python -c &quot;from dipy.data import fetch_sherbrooke_3shell;fetch_sherbrooke_3shell()&quot;
+
+echo &quot;Converting files&quot;
+mrconvert -fslgrad ~/.dipy/sherbrooke_3shell/HARDI193.bvec \
+    ~/.dipy/sherbrooke_3shell/HARDI193.bval ~/.dipy/sherbrooke_3shell/HARDI193.nii.gz \
+    dwi.mif
+
+echo &quot;Creating a mask&quot;
+dwi2mask dwi.mif mask.mif
+
+echo &quot;Estimating response function&quot;
+dwi2response dhollander dwi.mif wm.txt gm.txt csf.txt
+
+echo &quot;Reconstructing fiber orientation distribution&quot;
+dwi2fod -mask mask.mif msmt_csd dwi.mif wm.txt wm.mif \
+    gm.txt gm.mif csf.txt csf.mif
+
+echo &quot;Tracking&quot;
+tckgen -select 100000 -seed_image mask.mif wm.mif track.tck
+
+echo &quot;Done!&quot;
+</code></pre><p>To run it in a way that <em>Jarvis</em> can monitor it, we need to <a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html" title="A bit more on redirection">redirect the output</a> to a text file:</p>
+<pre><code>./run.sh &gt; pipeline.txt
+</code></pre><p>It&rsquo;s running! We can now test <em>Jarvis</em> running:</p>
+<pre><code>python jarvis.py
+</code></pre><p>Now you can just say something like &ldquo;<em>Hey Jarvis, what is going on with the pipeline?</em>&rdquo; while browsing Twitter!</p>
+<h2 id="useful-references">Useful references</h2>
+<ul>
+<li>
+<p><a href="https://realpython.com/python-speech-recognition/">A tutorial on SpeechRecognition with Python</a></p>
+</li>
+<li>
+<p><a href="https://github.com/mmirthula02/AI-Personal-Voice-assistant-using-Python">An example of Voice Assistant</a></p>
+</li>
+<li>
+<p><a href="https://www.techwithtim.net/tutorials/voice-assistant/wake-keyword/">Another example of Voice Assistant</a></p>
+</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

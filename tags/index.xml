@@ -6,11 +6,47 @@
     <description>Recent content in Tags on NeuroSnippets</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Mon, 12 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dMRI</title>
+      <link>https://neurosnippets.com/tags/dmri/</link>
+      <pubDate>Wed, 28 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/tags/dmri/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MRtrix3</title>
+      <link>https://neurosnippets.com/tags/mrtrix3/</link>
+      <pubDate>Wed, 28 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/tags/mrtrix3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SpeechRecognition</title>
+      <link>https://neurosnippets.com/tags/speechrecognition/</link>
+      <pubDate>Wed, 28 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/tags/speechrecognition/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tips-and-tricks</title>
+      <link>https://neurosnippets.com/tags/tips-and-tricks/</link>
+      <pubDate>Wed, 28 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/tags/tips-and-tricks/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>bokeh</title>
       <link>https://neurosnippets.com/tags/bokeh/</link>
-      <pubDate>Mon, 12 Apr 2021 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://neurosnippets.com/tags/bokeh/</guid>
       <description></description>
@@ -19,7 +55,7 @@
     <item>
       <title>dataviz</title>
       <link>https://neurosnippets.com/tags/dataviz/</link>
-      <pubDate>Mon, 12 Apr 2021 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://neurosnippets.com/tags/dataviz/</guid>
       <description></description>
@@ -28,7 +64,7 @@
     <item>
       <title>fMRI</title>
       <link>https://neurosnippets.com/tags/fmri/</link>
-      <pubDate>Mon, 12 Apr 2021 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://neurosnippets.com/tags/fmri/</guid>
       <description></description>
@@ -37,7 +73,7 @@
     <item>
       <title>holoviz</title>
       <link>https://neurosnippets.com/tags/holoviz/</link>
-      <pubDate>Mon, 12 Apr 2021 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://neurosnippets.com/tags/holoviz/</guid>
       <description></description>
@@ -46,7 +82,7 @@
     <item>
       <title>python</title>
       <link>https://neurosnippets.com/tags/python/</link>
-      <pubDate>Mon, 12 Apr 2021 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>https://neurosnippets.com/tags/python/</guid>
       <description></description>
@@ -107,24 +143,6 @@
     </item>
     
     <item>
-      <title>dMRI</title>
-      <link>https://neurosnippets.com/tags/dmri/</link>
-      <pubDate>Wed, 10 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://neurosnippets.com/tags/dmri/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>MRtrix3</title>
-      <link>https://neurosnippets.com/tags/mrtrix3/</link>
-      <pubDate>Wed, 10 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://neurosnippets.com/tags/mrtrix3/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>plotly</title>
       <link>https://neurosnippets.com/tags/plotly/</link>
       <pubDate>Wed, 03 Mar 2021 00:00:00 +0000</pubDate>
@@ -139,15 +157,6 @@
       <pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate>
       
       <guid>https://neurosnippets.com/tags/fsl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tips-and-tricks</title>
-      <link>https://neurosnippets.com/tags/tips-and-tricks/</link>
-      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://neurosnippets.com/tags/tips-and-tricks/</guid>
       <description></description>
     </item>
     

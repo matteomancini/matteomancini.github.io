@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SpeechRecognition on NeuroSnippets</title>
+    <link>https://neurosnippets.com/tags/speechrecognition/</link>
+    <description>Recent content in SpeechRecognition on NeuroSnippets</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <lastBuildDate>Wed, 28 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://neurosnippets.com/tags/speechrecognition/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hey Jarvis, what&#39;s up? A voice assistant to monitor a target application</title>
+      <link>https://neurosnippets.com/posts/voice-monitor/</link>
+      <pubDate>Wed, 28 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://neurosnippets.com/posts/voice-monitor/</guid>
+      <description>Can&amp;rsquo;t you just tell me? Let&amp;rsquo;s be frank: we are always running a lot of stuff, we constantly juggle multiple flows of data processing, on top of hundreds of tabs in the browser, email clients, drafts, honestly my head starts spinning just if I keep following this train of thought. I always feel that this kind of ordinary and apparent multi-tasking approach always takes its toll on focus. When it comes to deep focus, I personally believe that there is no solution: one has to avoid any context switching.</description>
+    </item>
+    
+  </channel>
+</rss>
